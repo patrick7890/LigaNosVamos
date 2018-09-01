@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-09-2018 17:54:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Integrantes" table="integrantes" catalog="nosvamos" optimistic-lock="version">
+        <id name="rutIntegrante" type="string">
+            <column name="rut_integrante" length="13" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="equipo" class="dto.Equipo" fetch="select">
+            <column name="equipo_id_equipo" not-null="true" />
+        </many-to-one>
+        <property name="nombreIntegrante" type="string">
+            <column name="nombre_integrante" length="45" not-null="true" />
+        </property>
+        <property name="nick" type="string">
+            <column name="nick" length="45" not-null="true" />
+        </property>
+        <property name="estadoInt" type="byte">
+            <column name="estado_int" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

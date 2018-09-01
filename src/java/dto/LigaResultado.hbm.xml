@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-09-2018 17:54:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.LigaResultado" table="liga_resultado" catalog="nosvamos" optimistic-lock="version">
+        <composite-id name="id" class="dto.LigaResultadoId">
+            <key-property name="ligaIdLiga" type="int">
+                <column name="liga_id_liga" />
+            </key-property>
+            <key-property name="resultadosIdResultados" type="int">
+                <column name="resultados_id_resultados" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="liga" class="dto.Liga" update="false" insert="false" fetch="select">
+            <column name="liga_id_liga" not-null="true" />
+        </many-to-one>
+        <many-to-one name="resultados" class="dto.Resultados" update="false" insert="false" fetch="select">
+            <column name="resultados_id_resultados" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

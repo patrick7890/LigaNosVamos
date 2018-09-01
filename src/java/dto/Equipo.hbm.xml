@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-09-2018 17:54:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Equipo" table="equipo" catalog="nosvamos" optimistic-lock="version">
+        <id name="idEquipo" type="java.lang.Integer">
+            <column name="id_equipo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="liga" class="dto.Liga" fetch="select">
+            <column name="liga_id_liga" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoLiga" class="dto.TipoLiga" fetch="select">
+            <column name="tipo_liga_idtipo_liga" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="dto.Usuario" fetch="select">
+            <column name="usuario_id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="nombreEquipo" type="string">
+            <column name="nombre_equipo" length="45" not-null="true" />
+        </property>
+        <property name="estadoEquipo" type="byte">
+            <column name="estado_equipo" not-null="true" />
+        </property>
+        <set name="integranteses" table="integrantes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="equipo_id_equipo" not-null="true" />
+            </key>
+            <one-to-many class="dto.Integrantes" />
+        </set>
+    </class>
+</hibernate-mapping>

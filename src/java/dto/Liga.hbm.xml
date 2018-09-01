@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-09-2018 17:54:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Liga" table="liga" catalog="nosvamos" optimistic-lock="version">
+        <id name="idLiga" type="java.lang.Integer">
+            <column name="id_liga" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoLiga" class="dto.TipoLiga" fetch="select">
+            <column name="tipo_liga_idtipo_liga" not-null="true" />
+        </many-to-one>
+        <property name="nombreLiga" type="string">
+            <column name="nombre_liga" length="45" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="timestamp">
+            <column name="fecha_inicio" length="19" not-null="true" />
+        </property>
+        <property name="fechaTermino" type="timestamp">
+            <column name="fecha_termino" length="19" not-null="true" />
+        </property>
+        <property name="lugar" type="string">
+            <column name="lugar" length="45" not-null="true" />
+        </property>
+        <set name="equipos" table="equipo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="liga_id_liga" not-null="true" />
+            </key>
+            <one-to-many class="dto.Equipo" />
+        </set>
+        <set name="ligaResultados" table="liga_resultado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="liga_id_liga" not-null="true" />
+            </key>
+            <one-to-many class="dto.LigaResultado" />
+        </set>
+    </class>
+</hibernate-mapping>

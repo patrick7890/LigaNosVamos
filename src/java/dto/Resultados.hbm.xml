@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-09-2018 17:54:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Resultados" table="resultados" catalog="nosvamos" optimistic-lock="version">
+        <id name="idResultados" type="java.lang.Integer">
+            <column name="id_resultados" />
+            <generator class="identity" />
+        </id>
+        <property name="equipo1" type="string">
+            <column name="equipo_1" length="45" not-null="true" />
+        </property>
+        <property name="equipo2" type="string">
+            <column name="equipo_2" length="45" not-null="true" />
+        </property>
+        <property name="ganador" type="string">
+            <column name="ganador" length="45" not-null="true" />
+        </property>
+        <property name="fechaResultado" type="timestamp">
+            <column name="fecha_resultado" length="19" not-null="true" />
+        </property>
+        <set name="ligaResultados" table="liga_resultado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="resultados_id_resultados" not-null="true" />
+            </key>
+            <one-to-many class="dto.LigaResultado" />
+        </set>
+    </class>
+</hibernate-mapping>
