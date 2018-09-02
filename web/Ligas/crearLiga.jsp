@@ -18,6 +18,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <jsp:include page="../Menus/menu.jsp"></jsp:include>
+        
         <!--inicio del contenido-->
         <div class="container">
             <div class="row justify-content-md-center">
@@ -27,36 +29,46 @@
                             <div class="card-body">
                                 <h1 class="text-center">Registro de Usuarios</h1>
                                 <hr>
+                                
+                                
+                                
                                 <div class="form-group">
                                     <label>Nombre De La Liga: </label>
-                                    <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
+                                    <input type="text" name="txtNombreLiga" placeholder="Ej:Internacional" minlength="4" class="form-control"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Correo: </label>
-                                    <input type="email" name="txtCorreo" placeholder="example@example.com" class="form-control"/>
+                                    <label>Fecha De Inicio :    </label>
+                                     <input type="datetime-local" name="dateFechaIni" />
                                 </div>
+                                
                                 <div class="form-group">
-                                    <label>Contraseña: </label>
-                                    <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
+                                    <label>Fecha De Termino :  </label>
+                                    <input type="datetime-local" name="dateFechaTer" />
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label>Luagar: </label>
+                                    <input type="text" name="txtLugar" placeholder="" minlength="4" class="form-control"/>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label>Tipo Liga: </label>
 
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
-                                    
-                                        <c:set  var="lista"  value="${li.ListarTipo()}"/>
-                                    
+
+                                    <c:set  var="lista"  value="${li.ListarTipo()}"/>
+
                                     <select class="form-control" name="ddlTipo">
 
                                         <option>Elige Una Opcion</option>
-                                       
+
                                         <c:forEach var="list" items="${lista}">
                                             <option>
                                                 <c:out value="${list.getDescripcion()}"/>
                                             </option>
-                                        
+
                                         </c:forEach>
-                                        
+
                                     </select>
                                 </div>
                                 <div class="form-group ">
@@ -67,7 +79,7 @@
                     </form>
                 </div>
             </div>
-                ${mensaje}
+            ${mensaje}
         </div>
         <!--fin del contenido-->
 
