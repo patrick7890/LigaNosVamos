@@ -97,16 +97,23 @@ public class ServletUsuario extends HttpServlet {
             String pass = request.getParameter("txtPass");
             String tipo = request.getParameter("ddlTipo");
             DAOUsuario dao = new DAOUsuario();
-            TipoUsuario ti=dao.buscarTipo(tipo);
+            TipoUsuario ti = dao.buscarTipo(tipo);
             Usuario usuario = new Usuario(ti, nombre, correo, pass);
-            
-            if (dao.agregar(usuario)) {
-                request.getSession().setAttribute("mensaje", "Usuario Agregado");
+            if (dao.buscarCorreo(correo) == null) {
+                if (dao.agregar(usuario)) {
+                    String mensaje = "<div class='alert alert-success text-center'>Usuario Agregado</div>'";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                } else {
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>'";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                }
             } else {
-                request.getSession().setAttribute("mensaje", "No se Pudo Registar");
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            request.getSession().setAttribute("mensaje", "Ocurrio un error insesperado "+e.getMessage());
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado</div>'";
+            request.getSession().setAttribute("mensaje", mensaje + e.getMessage());
         } finally {
             response.sendRedirect("Usuario/registro.jsp");
         }

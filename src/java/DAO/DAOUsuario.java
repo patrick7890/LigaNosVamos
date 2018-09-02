@@ -107,6 +107,20 @@ public class DAOUsuario {
         }
         return null;
     }
+    public Usuario buscarCorreo(String correo) {
+        try {
+            iniOperacion();
+            List<Usuario> lista = session.createQuery("from Usuario where Correo_Usuario='"+correo+"'").list();
+            for ( Usuario usu : lista ) {
+                return usu;
+            }
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo buscar el Usuario: " + e.getMessage());
+        }
+        return null;
+    }
     public TipoUsuario buscarTipo(Object o) {
         try {
             iniOperacion();
@@ -132,6 +146,17 @@ public class DAOUsuario {
             tx.rollback();
             session.close();
             throw new RuntimeException("No se pudo listar los Usuarios: " + e.getMessage());
+        }
+    }
+    public List<TipoUsuario> listarTipo() {
+        try {
+            iniOperacion();
+            List<TipoUsuario> lista = session.createQuery("from TipoUsuario").list();
+            return lista;
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo listar los Tipos: " + e.getMessage());
         }
     }
 }

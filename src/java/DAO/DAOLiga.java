@@ -124,7 +124,7 @@ public class DAOLiga {
     public List<TipoLiga> ListarTipo() {
         try {
             iniOperacion();
-            List<TipoLiga> lista = session.createQuery("from tipo_liga").list();
+            List<TipoLiga> lista = session.createQuery("from TipoLiga").list();
             return lista;
             
         } catch (Exception e) {

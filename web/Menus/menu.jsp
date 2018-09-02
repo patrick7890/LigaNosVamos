@@ -32,7 +32,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/LigaNosVamos/Usuario/registro.jsp">registro</a>
                     </li>
-                    <li class="nav-item navbar-toggler-right" >
+                    <li class="nav-item" >
                         
                         <a class="nav-link" href="/LigaNosVamos/Login.jsp" style="float: right"><i class="fas fa-sign-in-alt"></i>  login</a>
                     </li>

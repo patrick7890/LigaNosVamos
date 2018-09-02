@@ -43,15 +43,17 @@
                                     <label>Tipo Liga: </label>
 
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
-                                    <%
-                                        List<TipoLiga> lista = li.ListarTipo();
-                                    %>
+                                    
+                                        <c:set  var="lista"  value="${li.ListarTipo()}"/>
+                                    
                                     <select class="form-control" name="ddlTipo">
 
                                         <option>Elige Una Opcion</option>
                                        
-                                        <c:forEach var="l" items="lista">
-                                            <option value="" >l.getDescripcion</option>
+                                        <c:forEach var="list" items="${lista}">
+                                            <option>
+                                                <c:out value="${list.getDescripcion()}"/>
+                                            </option>
                                         
                                         </c:forEach>
                                         
@@ -65,9 +67,7 @@
                     </form>
                 </div>
             </div>
-            <div class="alert">
                 ${mensaje}
-            </div>
         </div>
         <!--fin del contenido-->
 
