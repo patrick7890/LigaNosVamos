@@ -38,8 +38,8 @@
                                 <div class="form-group">
                                     <label>Tipo: </label>
                                     <select class="form-control" name="ddlTipo">
-                                        <option value="Particular">Particular</option>
-                                        <option value="Organizacion">Organizacion</option>
+                                        <option value="3">Particular</option>
+                                        <option value="4">Organizacion</option>
                                     </select>
                                 </div>
                                 <div class="form-group ">

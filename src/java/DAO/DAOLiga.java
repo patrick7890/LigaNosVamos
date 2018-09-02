@@ -6,6 +6,7 @@
 package DAO;
 
 import dto.Liga;
+import dto.TipoLiga;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -87,7 +88,21 @@ public class DAOLiga {
         } catch (Exception e) {
             tx.rollback();
             session.close();
-            throw new RuntimeException("No se pudo blicar el Liga: " + e.getMessage());
+            throw new RuntimeException("No se pudo encontrar el Liga: " + e.getMessage());
+        }
+        return null;
+    }
+    public TipoLiga buscarTipo(Object o) {
+        try {
+            iniOperacion();
+            List<TipoLiga> lista = session.createQuery("from tipo_liga where idtipo_liga="+o).list();
+            for ( TipoLiga lig : lista ) {
+                return lig;
+            }
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo encontrar el Liga: " + e.getMessage());
         }
         return null;
     }

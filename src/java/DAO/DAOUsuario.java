@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import dto.TipoUsuario;
 import dto.Usuario;
 import java.util.List;
 import org.hibernate.Session;
@@ -97,6 +98,20 @@ public class DAOUsuario {
             iniOperacion();
             List<Usuario> lista = session.createQuery("from Usuario where IdUsuario="+o).list();
             for ( Usuario usu : lista ) {
+                return usu;
+            }
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo buscar el Usuario: " + e.getMessage());
+        }
+        return null;
+    }
+    public TipoUsuario buscarTipo(Object o) {
+        try {
+            iniOperacion();
+            List<TipoUsuario> lista = session.createQuery("from TipoUsuario where id_tipo_usuario="+o).list();
+            for ( TipoUsuario usu : lista ) {
                 return usu;
             }
         } catch (Exception e) {

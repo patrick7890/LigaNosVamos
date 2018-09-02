@@ -95,10 +95,11 @@ public class ServletUsuario extends HttpServlet {
             String nombre = request.getParameter("txtNombre");
             String correo = request.getParameter("txtCorreo");
             String pass = request.getParameter("txtPass");
-            String tipo = request.getParameter("ddlTipo").toString();
-            TipoUsuario ti=new TipoUsuario(tipo);
-            Usuario usuario = new Usuario(ti, nombre, correo, pass);
+            String tipo = request.getParameter("ddlTipo");
             DAOUsuario dao = new DAOUsuario();
+            TipoUsuario ti=dao.buscarTipo(tipo);
+            Usuario usuario = new Usuario(ti, nombre, correo, pass);
+            
             if (dao.agregar(usuario)) {
                 request.getSession().setAttribute("mensaje", "Usuario Agregado");
             } else {
