@@ -119,4 +119,21 @@ public class DAOLiga {
             throw new RuntimeException("No se pudo listar los Ligas: " + e.getMessage());
         }
     }
+    
+    
+    public List<TipoLiga> ListarTipo() {
+        try {
+            iniOperacion();
+            List<TipoLiga> lista = session.createQuery("from tipo_liga").list();
+            return lista;
+            
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo encontrar el Tipo Liga: " + e.getMessage());
+        }
+        
+    }
+    
+    
 }
