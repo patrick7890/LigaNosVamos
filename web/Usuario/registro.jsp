@@ -15,7 +15,7 @@
         <style>
             body{
                 background-image: url(../Recursos/img/bgRegistar.jpg); 
-                background-size: 100%;
+                background-size: cover;
             }
         </style>
     </head>
@@ -45,26 +45,28 @@
                                         <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
                                     </div>
                                 <jsp:useBean id="dao" class="DAO.DAOUsuario" scope="page" ></jsp:useBean>
-                                
+
                                 <c:set var="list" value="${dao.listarTipo()}"/>
-                                
+
                                 <div class="form-group">
                                     <label>Tipo: </label>
                                     <select class="form-control" name="ddlTipo">
+                                        <option value="0">Tipo de Usuario</option>
                                         <c:forEach var="li" items="${list}">
                                             <option value="${li.getIdTipoUsuario()}"><c:out value="${li.getDescripcion()}"/></option>
                                         </c:forEach>
-                                        <!--<option value="3">Particular</option>
-                                        <option value="4">Organizacion</option>-->
                                     </select>
                                 </div>
-                                <div class="form-group ">
-                                    <button class="btn btn-primary" type="submit"  name="btnAccion" value="Registar"><i class="far fa-fw fa-save"></i>Registar</button>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary btn-lg " type="submit"  name="btnAccion" value="Registar"><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    ${mensaje}
+                    <c:if test="${mensaje!=null}" >
+                        ${mensaje}
+                    </c:if>
+                    <c:remove var="mensaje" />
                 </div>
             </div>
         </div>

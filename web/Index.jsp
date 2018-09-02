@@ -10,64 +10,46 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="Recursos/css/style.css" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
         <jsp:include page="Menus/menu.jsp"></jsp:include>
-
-
-
             <div class="form-group">
-
-
             <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
-
             <c:set  var="lista"  value="${li.listarTodo()}"/>
-
-                <div class="row">
-
-            <c:forEach var="list" items="${lista}">
-
-
-
-
-                    <div class=" col-12 col-sm-12 col-md-6 col-xl-2 mt-2 " style="height: 100px" >
+            <div class="row">
+                <c:forEach var="list" items="${lista}">
+                    <div class=" col-12 col-sm-12 col-md-6 col-xl-4 mt-2 " style="height: 100px" >
                         <a href="http://www.dota2.com/international/overview/">
-                            <div class="thumbnail group group-thumbnail-108"  style="height: 100px" >
+                            <div class="thumbnail group group-thumbnail"  style="height: 100px" >
                                 <style>
-                                    
-                                    
-                                    .group-thumbnail-108{
-                                        opacity: 0.5;
-                                        background-size: 100%;
+                                    .group-thumbnail{
                                         background-image: url('Recursos/img/Dota.PNG');
+                                        background-size: cover;
+                                        width: 100%;
+                                        height: 100%;
+                                        content: "";
+                                        position: absolute;
+                                        background-position: 50%;
+                                        opacity: .4;
+                                        z-index: 0;
                                     }
                                 </style>
                                 <div class="thumbnail-title">
-                                    <h4 class="text-truncate" title="Last Heaven Fansub" ><c:out value="${list.getNombreLiga()}"/></h4>
+                                    <h4 class="text-truncate" title="${list.getNombreLiga()}" ><c:out value="${list.getNombreLiga()}"/></h4>
                                 </div>
-                                <span class="followers"><i class="fas fa-users fa-fw"></i><span><c:out value="${list.getFechaInicio()}"/></span></span>
-                                <span class="book-type badge badge-scanlation" >${list.getFechaInicio()}</span>
+                                <span class="">${list.getFechaInicio()}</span>
+                                <span class="text-center" >${list.getFechaInicio()}</span>
                             </div>
                         </a>
                     </div>
+                </c:forEach>
+            </div>
 
 
 
-
-
-            </c:forEach>
-
-                </div>
 
         </div>
-
-
-
-
-
-
-
-
     </body>
 </html>

@@ -24,10 +24,10 @@ public class DAOUsuario {
         tx = session.beginTransaction();
     }
     
-    public Usuario Login(String user, String pass) {
+    public Usuario login(String user, String pass) {
         try {
             iniOperacion();
-            List<Usuario> lista = session.createQuery("FROM Usuario where CorreoUsuario='" + user + "' and PassUsuario='" + pass + "'").list();
+            List<Usuario> lista = session.createQuery("FROM Usuario where Correo_Usuario='" + user + "' and Pass_Usuario='" + pass + "'").list();
             for (Usuario aux : lista) {
                 if (aux.getCorreoUsuario().equals(user) && aux.getPassUsuario().equals(pass)) {
                     return aux;

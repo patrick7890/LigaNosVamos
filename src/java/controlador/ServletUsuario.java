@@ -36,6 +36,9 @@ public class ServletUsuario extends HttpServlet {
         String opcion = request.getParameter("btnAccion");
 
         switch (opcion) {
+            case "Acceder":
+                Login(request, response);
+                break;
             case "Registar":
                 agregar(request, response);
                 break;
@@ -126,6 +129,26 @@ public class ServletUsuario extends HttpServlet {
 
     private void listar(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String correo=request.getParameter("txtCorreo");
+            String pass=request.getParameter("txtPass");
+            DAOUsuario dao = new DAOUsuario();
+            if (dao.login(correo, pass)!=null) {
+                response.sendRedirect("Index.jsp");
+            }else{
+                String mensaje="<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>'";
+                request.getSession().setAttribute("mensaje",mensaje);
+                request.getSession().setAttribute("correo",correo);
+                response.sendRedirect("Login.jsp");
+            }
+        } catch (Exception e) {
+            String mensaje="<div class='alert alert-danger text-center'>Error inesperado </div>'";
+                request.getSession().setAttribute("mensaje",mensaje);
+                response.sendRedirect("Login.jsp");
+        }
     }
 
 }

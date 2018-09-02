@@ -12,6 +12,37 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <jsp:include page="Menus/menu.jsp"></jsp:include>
+
+            <!--inicio del contenido-->
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-6">
+                        <form action="ProcesoUsuario" method="GET">
+                            <div class="card" style="margin-top: 20%">
+                                <div class="card-body">
+                                    <h1 class="text-center">Login</h1>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label>Correo: </label>
+                                        <input type="email" value="${correo}" name="txtCorreo" placeholder="example@example.com" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contraseña: </label>
+                                    <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary btn-lg " type="submit"  name="btnAccion" value="Acceder">Acceder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <c:if test="${mensaje!=null}" >
+                        ${mensaje}
+                    </c:if>
+                    <c:remove var="mensaje" />       
+                </div>
+            </div>
+        </div>
     </body>
 </html>
