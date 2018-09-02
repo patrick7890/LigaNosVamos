@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-sm-6">
-                    <form action="" method="GET">
+                    <form action="../ProcesoUsuario" method="GET">
                         <div class="card" style="">
                             <div class="card-body">
                                 <h1 class="text-center">Registro de Usuarios</h1>
@@ -35,13 +35,23 @@
                                     <label>Contraseña: </label>
                                     <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
                                 </div>
+                                <div class="form-group">
+                                    <label>Tipo: </label>
+                                    <select class="form-control" name="ddlTipo">
+                                        <option value="Particular">Particular</option>
+                                        <option value="Organizacion">Organizacion</option>
+                                    </select>
+                                </div>
                                 <div class="form-group ">
-                                    <button class="btn btn-primary" type="submit"  name="btnAccion" ><i class="far fa-fw fa-save"></i>Registar</button>
+                                    <button class="btn btn-primary" type="submit"  name="btnAccion" value="Registar"><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="alert">
+                ${mensaje}
             </div>
         </div>
         <!--fin del contenido-->
