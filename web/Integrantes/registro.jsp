@@ -39,8 +39,26 @@
                                     <input type="text" name="txtNick" placeholder="Ej:X_X" minlength="4" class="form-control"/>
                                 </div>
                                 <div class="form-group ">
+                                    <label>Ingrese la Imagen de Jugador </label>
+                                    <input class="btn btn-default" type="file" name="selec" value=""  />
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <div class="form-group ">
                                     <button class="btn btn-primary" type="submit"  name="btnAccion" ><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
+                                
+                                
+                                
+                                
+                                
                             </div>
                         </div>
                     </form>
