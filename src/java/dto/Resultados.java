@@ -1,5 +1,5 @@
 package dto;
-// Generated 01-09-2018 17:54:46 by Hibernate Tools 4.3.1
+// Generated 04-09-2018 13:49:56 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

@@ -1,5 +1,5 @@
 package dto;
-// Generated 01-09-2018 17:54:46 by Hibernate Tools 4.3.1
+// Generated 04-09-2018 13:49:56 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,6 +18,7 @@ public class Liga  implements java.io.Serializable {
      private Date fechaInicio;
      private Date fechaTermino;
      private String lugar;
+     private Set<Imagen> imagens = new HashSet<Imagen>(0);
      private Set<Equipo> equipos = new HashSet<Equipo>(0);
      private Set<LigaResultado> ligaResultados = new HashSet<LigaResultado>(0);
 
@@ -32,12 +33,13 @@ public class Liga  implements java.io.Serializable {
         this.fechaTermino = fechaTermino;
         this.lugar = lugar;
     }
-    public Liga(TipoLiga tipoLiga, String nombreLiga, Date fechaInicio, Date fechaTermino, String lugar, Set<Equipo> equipos, Set<LigaResultado> ligaResultados) {
+    public Liga(TipoLiga tipoLiga, String nombreLiga, Date fechaInicio, Date fechaTermino, String lugar, Set<Imagen> imagens, Set<Equipo> equipos, Set<LigaResultado> ligaResultados) {
        this.tipoLiga = tipoLiga;
        this.nombreLiga = nombreLiga;
        this.fechaInicio = fechaInicio;
        this.fechaTermino = fechaTermino;
        this.lugar = lugar;
+       this.imagens = imagens;
        this.equipos = equipos;
        this.ligaResultados = ligaResultados;
     }
@@ -83,6 +85,13 @@ public class Liga  implements java.io.Serializable {
     
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+    public Set<Imagen> getImagens() {
+        return this.imagens;
+    }
+    
+    public void setImagens(Set<Imagen> imagens) {
+        this.imagens = imagens;
     }
     public Set<Equipo> getEquipos() {
         return this.equipos;

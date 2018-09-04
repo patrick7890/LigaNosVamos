@@ -54,6 +54,7 @@ Contributor(s):
     <mapping resource="dto/LigaResultado.hbm.xml"/>
     <mapping resource="dto/TipoUsuario.hbm.xml"/>
     <mapping resource="dto/Equipo.hbm.xml"/>
+    <mapping resource="dto/Imagen.hbm.xml"/>
     <mapping resource="dto/Resultados.hbm.xml"/>
     <mapping resource="dto/TipoLiga.hbm.xml"/>
   </session-factory>

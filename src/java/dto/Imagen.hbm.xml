@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-09-2018 13:49:57 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Imagen" table="imagen" catalog="nosvamos" optimistic-lock="version">
+        <id name="idImagen" type="java.lang.Integer">
+            <column name="id_imagen" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="equipo" class="dto.Equipo" fetch="select">
+            <column name="equipo_id_equipo" />
+        </many-to-one>
+        <many-to-one name="integrantes" class="dto.Integrantes" fetch="select">
+            <column name="integrantes_rut_integrante" length="13" />
+        </many-to-one>
+        <many-to-one name="liga" class="dto.Liga" fetch="select">
+            <column name="liga_id_liga" />
+        </many-to-one>
+        <property name="imagen" type="string">
+            <column name="imagen" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
