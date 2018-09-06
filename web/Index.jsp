@@ -10,8 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="Recursos/css/style.css" type="text/css"/>
-        <title>JSP Page</title>
+        <title>Index</title>
     </head>
     <body>
         <jsp:include page="Menus/menu.jsp"></jsp:include>
@@ -45,10 +44,48 @@
                     </div>
                 </c:forEach>
             </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="container">
+                <form method="GET" action="ProcesoUsuario">
+                    <button type="submit" value="Listar" name="btnAccion" class="btn btn-success">Listar</button>
+                </form>
 
+                <table class="table table-hover">
+                    <c:forEach var="list" items="${listaUsu}">
+                        <tr>
+                        <form method="GET" action="ProcesoUsuario">
+                            <td>Nombre: <c:out value="${list.getNombreUsuario()}"/></td>
+                            <td>Tipo: <c:out value="${list.getTipoUsuario().getDescripcion()}"/></td>
+                            <td>Correo <c:out value="${list.getCorreoUsuario()}"/></td>
+                            <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
+                            <td><button type="submit" class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button></td>
+                        </form>
 
+                        </tr>
+                    </c:forEach>
+                </table>
+                <table class="table table-hover">
+                    <c:forEach var="list" items="${listaUsu}">
+                        <tr>
+                        <form method="GET" action="ProcesoUsuario">
+                            <td>Nombre: <input type="text" class="form-control" name="txtUsuario" value="${list.getNombreUsuario()}"/></td>
+                            <td>password: <input type="password" class="form-control" name="txtUsuario" value="${list.getPassUsuario()}"/></td>
+                            <td>Tipo: <input type="text" class="form-control" name="txtUsuario" value="${list.getTipoUsuario().getDescripcion()}"/></td>
+                            <td>Correo <input type="text" class="form-control" name="txtUsuario" value="${list.getCorreoUsuario()}"/></td>
+                            <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
+                            <td><button type="submit" class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
+                        </form>
 
+                        </tr>
+                    </c:forEach>
+                </table>
 
+                <c:if test="${mensaje!=null}" >
+                    ${mensaje}
+                </c:if>
+                <c:remove var="mensaje" />
+            </div>
         </div>
     </body>
 </html>

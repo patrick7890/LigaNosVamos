@@ -96,7 +96,7 @@ public class DAOUsuario {
     public Usuario buscar(Object o) {
         try {
             iniOperacion();
-            List<Usuario> lista = session.createQuery("from Usuario where IdUsuario="+o).list();
+            List<Usuario> lista = session.createQuery("from Usuario where id_usuario='"+o+"'").list();
             for ( Usuario usu : lista ) {
                 return usu;
             }

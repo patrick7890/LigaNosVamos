@@ -48,6 +48,9 @@ public class ServletUsuario extends HttpServlet {
             case "Listar":
                 listar(request, response);
                 break;
+            case "Actualizar":
+                actualizar(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -123,31 +126,90 @@ public class ServletUsuario extends HttpServlet {
 
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("idUsu"));
+            DAOUsuario dao = new DAOUsuario();
+            if (dao.eliminar(id)) {
+                String mensaje = "<div class='alert alert-success text-center'>Usuario Eliminado</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
+            } else {
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Usuario</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
+            }
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            request.getSession().setAttribute("mensaje", mensaje);
+        } finally {
+            listar(request, response);
+        }
     }
 
-    private void listar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            DAOUsuario dao = new DAOUsuario();
+            if (dao.listarTodo() != null) {
+                request.getSession().setAttribute("listaUsu", dao.listarTodo());
+            } else {
+                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Usuarios</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
+            }
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>'";
+            request.getSession().setAttribute("mensaje", mensaje);
+        } finally {
+            response.sendRedirect("Index.jsp");
+        }
     }
 
     private void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String correo=request.getParameter("txtCorreo");
-            String pass=request.getParameter("txtPass");
+            String correo = request.getParameter("txtCorreo");
+            String pass = request.getParameter("txtPass");
             DAOUsuario dao = new DAOUsuario();
-            if (dao.login(correo, pass)!=null) {
+            if (dao.login(correo, pass) != null) {
                 response.sendRedirect("Index.jsp");
-            }else{
-                String mensaje="<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>'";
-                request.getSession().setAttribute("mensaje",mensaje);
-                request.getSession().setAttribute("correo",correo);
+            } else {
+                String mensaje = "<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
+                request.getSession().setAttribute("correo", correo);
                 response.sendRedirect("Login.jsp");
             }
         } catch (Exception e) {
-            String mensaje="<div class='alert alert-danger text-center'>Error inesperado </div>'";
-                request.getSession().setAttribute("mensaje",mensaje);
-                response.sendRedirect("Login.jsp");
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            request.getSession().setAttribute("mensaje", mensaje);
+            response.sendRedirect("Login.jsp");
+        }
+    }
+
+    private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("idUsu"));
+            String nombre = request.getParameter("txtNombre");
+            String correo = request.getParameter("txtCorreo");
+            String pass = request.getParameter("txtPass");
+            String tipo = request.getParameter("ddlTipo");
+            DAOUsuario dao = new DAOUsuario();
+            TipoUsuario ti = dao.buscarTipo(tipo);
+            Usuario usuario = new Usuario(ti, nombre, correo, pass);
+            usuario.setIdUsuario(id);
+            if (dao.buscar(id)!=null) {
+                if (dao.actualizar(usuario)) {
+                    String mensaje = "<div class='alert alert-success text-center'>Usuario Actualizado</div>'";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                } else {
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>'";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                }
+            } else {
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                request.getSession().setAttribute("mensaje", mensaje);
+            }
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado</div>'";
+            request.getSession().setAttribute("mensaje", mensaje + e.getMessage());
+        } finally {
+            response.sendRedirect("Index.jsp");
         }
     }
 
