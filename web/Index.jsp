@@ -69,10 +69,10 @@
                     <c:forEach var="list" items="${listaUsu}">
                         <tr>
                         <form method="GET" action="ProcesoUsuario">
-                            <td>Nombre: <input type="text" class="form-control" name="txtUsuario" value="${list.getNombreUsuario()}"/></td>
-                            <td>password: <input type="password" class="form-control" name="txtUsuario" value="${list.getPassUsuario()}"/></td>
-                            <td>Tipo: <input type="text" class="form-control" name="txtUsuario" value="${list.getTipoUsuario().getDescripcion()}"/></td>
-                            <td>Correo <input type="text" class="form-control" name="txtUsuario" value="${list.getCorreoUsuario()}"/></td>
+                            <td>Nombre: <input type="text" class="form-control" name="txtNombre" value="${list.getNombreUsuario()}"/></td>
+                            <td>password: <input type="password" class="form-control" name="txtPass" value="${list.getPassUsuario()}"/></td>
+                            <td>Tipo: <select readonly="" class="form-control" name="ddlTipo" ><option value="${list.getTipoUsuario().getIdTipoUsuario()}"><c:out value="${list.getTipoUsuario().getDescripcion()}"/></option>></select></td>
+                            <td>Correo <input type="text" class="form-control" name="txtCorreo" value="${list.getCorreoUsuario()}"/></td>
                             <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
                             <td><button type="submit" class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
                         </form>

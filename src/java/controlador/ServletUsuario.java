@@ -118,8 +118,8 @@ public class ServletUsuario extends HttpServlet {
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado</div>'";
-            request.getSession().setAttribute("mensaje", mensaje + e.getMessage());
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado "+ e.getMessage()+"</div>'";
+            request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Usuario/registro.jsp");
         }
@@ -206,10 +206,10 @@ public class ServletUsuario extends HttpServlet {
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado</div>'";
-            request.getSession().setAttribute("mensaje", mensaje + e.getMessage());
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado"+e.getMessage()+"</div>'";
+            request.getSession().setAttribute("mensaje", mensaje );
         } finally {
-            response.sendRedirect("Index.jsp");
+            listar(request, response);
         }
     }
 
