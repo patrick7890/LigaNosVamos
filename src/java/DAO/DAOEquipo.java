@@ -118,4 +118,26 @@ public class DAOEquipo {
             throw new RuntimeException("No se pudo listar los Equipos: " + e.getMessage());
         }
     }
+    public List<Equipo> listarEquipoUsuario(Object o) {
+        try {
+            iniOperacion();
+            List<Equipo> lista = session.createQuery("from Equipo where usuario_id_usuario="+o).list();
+            return lista;
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo listar los Equipos: " + e.getMessage());
+        }
+    }
+    public List<Equipo> listarEquipoLiga(Object o) {
+        try {
+            iniOperacion();
+            List<Equipo> lista = session.createQuery("from Equipo where liga_id_liga="+o).list();
+            return lista;
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo listar los Equipos: " + e.getMessage());
+        }
+    }
 }
