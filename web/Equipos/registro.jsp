@@ -1,4 +1,7 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sesUsu==null}">
+    <c:redirect url="/Index.jsp"></c:redirect>
+</c:if>
 <%-- 
     Document   : registro
     Created on : 04-sep-2018, 14:30:53
@@ -29,13 +32,14 @@
                                     <div class="form-group">
                                         <label>Nombre De Equipo: </label>
                                         <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Ingrese la Imagen de Equipo </label>
-                                        <input class="btn btn-default" type="file" name="selec" value=""  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tipo Liga: </label>
+                                        <input type="hidden" name="txtNombreUsu" value="${sesUsu.getIdUsuario()}"/>
+                                </div>
+                                <div class="form-group ">
+                                    <label>Ingrese la Imagen de Equipo </label>
+                                    <input class="btn btn-default" type="file" name="selec" value=""  />
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo Liga: </label>
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
                                     <c:set  var="lista"  value="${li.ListarTipo()}"/>
                                     <select class="form-control" name="ddlTipo">
@@ -54,6 +58,10 @@
                             </div>
                         </div>
                     </form>
+                    <c:if test="${mensaje!=null}" >
+                        ${mensaje}
+                    </c:if>
+                    <c:remove var="mensaje" />
                 </div>
             </div>
         </div>

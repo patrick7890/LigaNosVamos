@@ -98,16 +98,15 @@ public class ServletEquipo extends HttpServlet {
     private void agregar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
 
-            String var = request.getParameter("txt");
-            String var1 = request.getParameter("txt");
-            String var2 = request.getParameter("txt");
-            String var4 = request.getParameter("txt");
+            String nombre = request.getParameter("txtNombre");
+            String nombreUsu = request.getParameter("txtNombreUsu");
             String tipo = request.getParameter("ddlTipo");
+            byte estado = 1;
             DAOEquipo dao = new DAOEquipo();
             DAOUsuario daoUsu = new DAOUsuario();
-            Usuario usu = daoUsu.buscar(var);
+            Usuario usu = daoUsu.buscar(nombreUsu);
             TipoLiga ti = dao.buscarTipo(tipo);
-            Equipo e = new Equipo(null, ti, usu, var, Byte.parseByte(var2));
+            Equipo e = new Equipo(null, ti, usu, nombre, estado);
             if (dao.agregar(e)) {
                 String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -120,7 +119,7 @@ public class ServletEquipo extends HttpServlet {
             String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
-            response.sendRedirect("Equipo/registro.jsp");
+            response.sendRedirect("Equipos/registro.jsp");
         }
 
     }

@@ -51,6 +51,9 @@ public class ServletUsuario extends HttpServlet {
             case "Actualizar":
                 actualizar(request, response);
                 break;
+            case "Cerrar Sesion":
+                cerrarSesion(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -118,7 +121,7 @@ public class ServletUsuario extends HttpServlet {
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado "+ e.getMessage()+"</div>";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Usuario/registro.jsp");
@@ -168,7 +171,8 @@ public class ServletUsuario extends HttpServlet {
             String pass = request.getParameter("txtPass");
             DAOUsuario dao = new DAOUsuario();
             if (dao.login(correo, pass) != null) {
-                response.sendRedirect("Index.jsp");
+                request.getSession().setAttribute("sesUsu", dao.login(correo, pass));
+                response.sendRedirect("Usuario/index.jsp");
             } else {
                 String mensaje = "<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -193,7 +197,7 @@ public class ServletUsuario extends HttpServlet {
             TipoUsuario ti = dao.buscarTipo(tipo);
             Usuario usuario = new Usuario(ti, nombre, correo, pass);
             usuario.setIdUsuario(id);
-            if (dao.buscar(id)!=null) {
+            if (dao.buscar(id) != null) {
                 if (dao.actualizar(usuario)) {
                     String mensaje = "<div class='alert alert-success text-center'>Usuario Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
@@ -206,10 +210,19 @@ public class ServletUsuario extends HttpServlet {
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado"+e.getMessage()+"</div>";
-            request.getSession().setAttribute("mensaje", mensaje );
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>";
+            request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);
+        }
+    }
+
+    private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.getSession().setAttribute("sesUsu", null);
+            response.sendRedirect("Index.jsp");
+
+        } catch (Exception e) {
         }
     }
 
