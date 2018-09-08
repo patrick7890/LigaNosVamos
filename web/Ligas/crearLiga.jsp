@@ -18,57 +18,47 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <jsp:include page="../Menus/menu.jsp"></jsp:include>
-        
-        <!--inicio del contenido-->
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-sm-6">
-                    <form action="../ProcesoUsuario" method="GET">
-                        <div class="card" style="">
-                            <div class="card-body">
-                                <h1 class="text-center">Registro de Usuarios</h1>
-                                <hr>
-                                
-                                
-                                
-                                <div class="form-group">
-                                    <label>Nombre De La Liga: </label>
-                                    <input type="text" name="txtNombreLiga" placeholder="Ej:Internacional" minlength="4" class="form-control"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Fecha De Inicio :    </label>
-                                     <input type="datetime-local" name="dateFechaIni" />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Fecha De Termino :  </label>
-                                    <input type="datetime-local" name="dateFechaTer" />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Luagar: </label>
-                                    <input type="text" name="txtLugar" placeholder="" minlength="4" class="form-control"/>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Tipo Liga: </label>
+        <jsp:include page="../Menus/menu.jsp"></jsp:include>
 
+            <!--inicio del contenido-->
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-6">
+                        <form action="../ProcesoLiga" method="GET">
+                            <div class="card" style="">
+                                <div class="card-body">
+                                    <h1 class="text-center">Registro de Usuarios</h1>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label>Nombre De La Liga: </label>
+                                        <input type="text" name="txtNombreLiga" placeholder="Ej:Internacional" minlength="4" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha De Inicio :    </label>
+                                        <input type="date" name="dateFechaIni" />
+                                        <input type="time" name="HoraIni" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Fecha De Termino :  </label>
+                                        <input type="date" name="dateFechaTer" />
+                                        <input type="time" name="HoraTer" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Luagar: </label>
+                                        <input type="text" name="txtLugar" placeholder="" minlength="4" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tipo Liga: </label>
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
-
                                     <c:set  var="lista"  value="${li.ListarTipo()}"/>
-
                                     <select class="form-control" name="ddlTipo">
-
                                         <option>Elige Una Opcion</option>
-
                                         <c:forEach var="list" items="${lista}">
-                                            <option>
+                                            <option value="${list.getIdtipoLiga()}">
                                                 <c:out value="${list.getDescripcion()}"/>
                                             </option>
-
                                         </c:forEach>
-
                                     </select>
                                 </div>
                                 <div class="form-group ">
@@ -77,9 +67,13 @@
                             </div>
                         </div>
                     </form>
+                    <c:if test="${mensaje!=null}" >
+                        ${mensaje}
+                    </c:if>
+                    <c:remove var="mensaje" />
                 </div>
             </div>
-            ${mensaje}
+
         </div>
         <!--fin del contenido-->
 

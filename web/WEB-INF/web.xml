@@ -4,9 +4,25 @@
         <servlet-name>ServletUsuario</servlet-name>
         <servlet-class>controlador.ServletUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletEquipo</servlet-name>
+        <servlet-class>controlador.ServletEquipo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLiga</servlet-name>
+        <servlet-class>controlador.ServletLiga</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ProcesoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEquipo</servlet-name>
+        <url-pattern>/ProcesoEquipo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLiga</servlet-name>
+        <url-pattern>/ProcesoLiga</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

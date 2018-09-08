@@ -107,18 +107,18 @@ public class ServletUsuario extends HttpServlet {
             Usuario usuario = new Usuario(ti, nombre, correo, pass);
             if (dao.buscarCorreo(correo) == null) {
                 if (dao.agregar(usuario)) {
-                    String mensaje = "<div class='alert alert-success text-center'>Usuario Agregado</div>'";
+                    String mensaje = "<div class='alert alert-success text-center'>Usuario Agregado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 } else {
-                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>'";
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 }
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado "+ e.getMessage()+"</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado "+ e.getMessage()+"</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Usuario/registro.jsp");
@@ -131,14 +131,14 @@ public class ServletUsuario extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idUsu"));
             DAOUsuario dao = new DAOUsuario();
             if (dao.eliminar(id)) {
-                String mensaje = "<div class='alert alert-success text-center'>Usuario Eliminado</div>'";
+                String mensaje = "<div class='alert alert-success text-center'>Usuario Eliminado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Usuario</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Usuario</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);
@@ -151,14 +151,14 @@ public class ServletUsuario extends HttpServlet {
             if (dao.listarTodo() != null) {
                 request.getSession().setAttribute("listaUsu", dao.listarTodo());
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Usuarios</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Usuarios</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
-            response.sendRedirect("Index.jsp");
+            response.sendRedirect("Usuario/administrar.jsp");
         }
     }
 
@@ -170,13 +170,13 @@ public class ServletUsuario extends HttpServlet {
             if (dao.login(correo, pass) != null) {
                 response.sendRedirect("Index.jsp");
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>Correo o contraseña incorrecto</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
                 request.getSession().setAttribute("correo", correo);
                 response.sendRedirect("Login.jsp");
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>";
             request.getSession().setAttribute("mensaje", mensaje);
             response.sendRedirect("Login.jsp");
         }
@@ -195,18 +195,18 @@ public class ServletUsuario extends HttpServlet {
             usuario.setIdUsuario(id);
             if (dao.buscar(id)!=null) {
                 if (dao.actualizar(usuario)) {
-                    String mensaje = "<div class='alert alert-success text-center'>Usuario Actualizado</div>'";
+                    String mensaje = "<div class='alert alert-success text-center'>Usuario Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 } else {
-                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>'";
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 }
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado"+e.getMessage()+"</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado"+e.getMessage()+"</div>";
             request.getSession().setAttribute("mensaje", mensaje );
         } finally {
             listar(request, response);

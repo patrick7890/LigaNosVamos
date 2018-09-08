@@ -9,8 +9,8 @@ import DAO.DAOLiga;
 import dto.Liga;
 import dto.TipoLiga;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Patricio
  */
 public class ServletLiga extends HttpServlet {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -96,28 +99,36 @@ public class ServletLiga extends HttpServlet {
     private void agregar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
 
-            String var = request.getParameter("txt");
-            String var1 = request.getParameter("txt");
-            Date var2 = Date.valueOf(request.getParameter("txt"));
-            Date var3 = Date.valueOf(request.getParameter("txt"));
-            String var4 = request.getParameter("txt");
+            String nombreLiga = request.getParameter("txtNombreLiga");
+            Date fechaini = Date.valueOf(request.getParameter("dateFechaIni"));
+            Date fechater = Date.valueOf(request.getParameter("dateFechaTer"));
+            String lugar = request.getParameter("txtLugar");
             String tipo = request.getParameter("ddlTipo");
             DAOLiga dao = new DAOLiga();
             TipoLiga ti = dao.buscarTipo(tipo);
-            Liga l = new Liga(ti, var1, var2, var3, var4);
+            
+            Liga l = new Liga(ti, nombreLiga, fechaini, fechater, lugar);
             if (dao.agregar(l)) {
-                String mensaje = "<div class='alert alert-success text-center'>Liga Agregado</div>'";
+                String mensaje = "<div class='alert alert-success text-center'>Liga Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
-
+             /*
+            String hora = request.getParameter("HoraIni") + ":00";
+            String fecha = request.getParameter("dateFechaIni");
+            Time h = Time.valueOf(hora);
+            Date f=Date.valueOf(fecha);
+            String fullDate = fecha + " " + hora;
+            Long f=Date.parse(fullDate);
+            mensaje = f;
+            request.getSession().setAttribute("mensaje", mensaje);*/
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
-            response.sendRedirect("Liga/registro.jsp");
+            response.sendRedirect("Ligas/crearLiga.jsp");
         }
 
     }
@@ -127,14 +138,14 @@ public class ServletLiga extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idUsu"));
             DAOLiga dao = new DAOLiga();
             if (dao.eliminar(id)) {
-                String mensaje = "<div class='alert alert-success text-center'>Liga Eliminado</div>'";
+                String mensaje = "<div class='alert alert-success text-center'>Liga Eliminado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Liga</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Liga</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);
@@ -147,11 +158,11 @@ public class ServletLiga extends HttpServlet {
             if (dao.listarTodo() != null) {
                 request.getSession().setAttribute("listaUsu", dao.listarTodo());
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Liga</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Liga</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Index.jsp");
@@ -162,29 +173,29 @@ public class ServletLiga extends HttpServlet {
         try {
 
             int var = Integer.parseInt(request.getParameter("txt"));
-            String var1 = request.getParameter("txt");
-            Date var2 = Date.valueOf(request.getParameter("txt"));
-            Date var3 = Date.valueOf(request.getParameter("txt"));
+           String nombreLiga = request.getParameter("txtNombreLiga");
+            Date fechaini = Date.valueOf(request.getParameter("dateFechaIni"));
+            Date fechater = Date.valueOf(request.getParameter("dateFechaTer"));
+            String lugar = request.getParameter("txtLugar");
             String tipo = request.getParameter("ddlTipo");
-            String estado = request.getParameter("txt");
             DAOLiga dao = new DAOLiga();
             TipoLiga ti = dao.buscarTipo(tipo);
-            Liga l = new Liga(ti, tipo, var2, var3, var1);
+            Liga l = new Liga(ti, nombreLiga, fechaini, fechater, lugar);
             l.setIdLiga(var);
             if (dao.buscar(var) != null) {
                 if (dao.actualizar(l)) {
-                    String mensaje = "<div class='alert alert-success text-center'>Liga Actualizado</div>'";
+                    String mensaje = "<div class='alert alert-success text-center'>Liga Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 } else {
-                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>'";
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 }
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);

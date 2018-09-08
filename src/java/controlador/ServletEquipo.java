@@ -13,7 +13,6 @@ import dto.Liga;
 import dto.TipoLiga;
 import dto.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -110,15 +109,15 @@ public class ServletEquipo extends HttpServlet {
             TipoLiga ti = dao.buscarTipo(tipo);
             Equipo e = new Equipo(null, ti, usu, var, Byte.parseByte(var2));
             if (dao.agregar(e)) {
-                String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>'";
+                String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
 
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Equipo/registro.jsp");
@@ -131,14 +130,14 @@ public class ServletEquipo extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idUsu"));
             DAOEquipo dao = new DAOEquipo();
             if (dao.eliminar(id)) {
-                String mensaje = "<div class='alert alert-success text-center'>Equipo Eliminado</div>'";
+                String mensaje = "<div class='alert alert-success text-center'>Equipo Eliminado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Equipo</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Eliminar al Equipo</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado </div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);
@@ -151,11 +150,11 @@ public class ServletEquipo extends HttpServlet {
             if (dao.listarTodo() != null) {
                 request.getSession().setAttribute("listaUsu", dao.listarTodo());
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Equipos</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>No se encontraron Equipos</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             response.sendRedirect("Index.jsp");
@@ -181,18 +180,18 @@ public class ServletEquipo extends HttpServlet {
             e.setIdEquipo(var);
             if (dao.buscar(var) != null) {
                 if (dao.actualizar(e)) {
-                    String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>'";
+                    String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 } else {
-                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>'";
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 }
             } else {
-                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>'";
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
         } catch (Exception e) {
-            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>'";
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
             listar(request, response);

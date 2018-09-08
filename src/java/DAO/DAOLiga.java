@@ -95,7 +95,7 @@ public class DAOLiga {
     public TipoLiga buscarTipo(Object o) {
         try {
             iniOperacion();
-            List<TipoLiga> lista = session.createQuery("from tipo_liga where idtipo_liga="+o).list();
+            List<TipoLiga> lista = session.createQuery("from TipoLiga where idtipo_liga='"+o+"'").list();
             for ( TipoLiga lig : lista ) {
                 return lig;
             }

@@ -151,6 +151,17 @@ public class DAOUsuario {
     public List<TipoUsuario> listarTipo() {
         try {
             iniOperacion();
+            List<TipoUsuario> lista = session.createQuery("from TipoUsuario where id_tipo_usuario >2").list();
+            return lista;
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo listar los Tipos: " + e.getMessage());
+        }
+    }
+    public List<TipoUsuario> listarTipoAdmin() {
+        try {
+            iniOperacion();
             List<TipoUsuario> lista = session.createQuery("from TipoUsuario").list();
             return lista;
         } catch (Exception e) {

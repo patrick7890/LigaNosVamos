@@ -21,61 +21,36 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="" method="GET">
+                        <form action="../ProcesoEquipo" method="GET">
                             <div class="card" style="">
                                 <div class="card-body">
                                     <h1 class="text-center">Registro De Equipo</h1>
                                     <hr>
-
-
                                     <div class="form-group">
                                         <label>Nombre De Equipo: </label>
                                         <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
                                     </div>
-
-
                                     <div class="form-group ">
                                         <label>Ingrese la Imagen de Equipo </label>
                                         <input class="btn btn-default" type="file" name="selec" value=""  />
                                     </div>
-
-
-
-
-
-
                                     <div class="form-group">
                                         <label>Tipo Liga: </label>
-
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
-
-                                        <c:set  var="lista"  value="${li.ListarTipo()}"/>
-
+                                    <c:set  var="lista"  value="${li.ListarTipo()}"/>
                                     <select class="form-control" name="ddlTipo">
-
                                         <option>Elige Una Opcion</option>
-
                                         <c:forEach var="list" items="${lista}">
-                                            <option >
-                                            <c:out value="${list.getDescripcion()}"/>
+                                            <option value="${list.getIdtipoLiga()}">
+                                                <c:out value="${list.getDescripcion()}"/>
                                             </option>
-
                                         </c:forEach>
 
                                     </select>
                                 </div>
-
-
-
-
                                 <div class="form-group ">
-                                    <button class="btn btn-primary" type="submit"  name="btnAccion" ><i class="far fa-fw fa-save"></i>Registar</button>
+                                    <button class="btn btn-primary" type="submit"  name="btnAccion" value="Registar"><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
-
-
-
-
-
                             </div>
                         </div>
                     </form>

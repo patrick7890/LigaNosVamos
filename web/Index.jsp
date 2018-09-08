@@ -38,54 +38,13 @@
                                     <h4 class="text-truncate" title="${list.getNombreLiga()}" ><c:out value="${list.getNombreLiga()}"/></h4>
                                 </div>
                                 <span class="">${list.getFechaInicio()}</span>
-                                <span class="text-center" >${list.getFechaInicio()}</span>
+                                <span class="text-center" >${list.getFechaTermino()}</span>
                             </div>
                         </a>
                     </div>
                 </c:forEach>
             </div>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="container">
-                <form method="GET" action="ProcesoUsuario">
-                    <button type="submit" value="Listar" name="btnAccion" class="btn btn-success">Listar</button>
-                </form>
-
-                <table class="table table-hover">
-                    <c:forEach var="list" items="${listaUsu}">
-                        <tr>
-                        <form method="GET" action="ProcesoUsuario">
-                            <td>Nombre: <c:out value="${list.getNombreUsuario()}"/></td>
-                            <td>Tipo: <c:out value="${list.getTipoUsuario().getDescripcion()}"/></td>
-                            <td>Correo <c:out value="${list.getCorreoUsuario()}"/></td>
-                            <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
-                            <td><button type="submit" class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button></td>
-                        </form>
-
-                        </tr>
-                    </c:forEach>
-                </table>
-                <table class="table table-hover">
-                    <c:forEach var="list" items="${listaUsu}">
-                        <tr>
-                        <form method="GET" action="ProcesoUsuario">
-                            <td>Nombre: <input type="text" class="form-control" name="txtNombre" value="${list.getNombreUsuario()}"/></td>
-                            <td>password: <input type="password" class="form-control" name="txtPass" value="${list.getPassUsuario()}"/></td>
-                            <td>Tipo: <select readonly="" class="form-control" name="ddlTipo" ><option value="${list.getTipoUsuario().getIdTipoUsuario()}"><c:out value="${list.getTipoUsuario().getDescripcion()}"/></option>></select></td>
-                            <td>Correo <input type="text" class="form-control" name="txtCorreo" value="${list.getCorreoUsuario()}"/></td>
-                            <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
-                            <td><button type="submit" class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
-                        </form>
-
-                        </tr>
-                    </c:forEach>
-                </table>
-
-                <c:if test="${mensaje!=null}" >
-                    ${mensaje}
-                </c:if>
-                <c:remove var="mensaje" />
-            </div>
-        </div>
+       
     </body>
 </html>
