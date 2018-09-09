@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="../ProcesoLiga" method="GET">
+                        <form action="../ProcesoLiga" method="GET" enctype = "multipart/form-data">
                             <div class="card" style="">
                                 <div class="card-body">
                                     <h1 class="text-center">Registro de Usuarios</h1>
@@ -71,6 +71,7 @@
                         ${mensaje}
                     </c:if>
                     <c:remove var="mensaje" />
+                 
                 </div>
             </div>
 

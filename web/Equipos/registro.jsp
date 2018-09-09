@@ -62,6 +62,7 @@
                         ${mensaje}
                     </c:if>
                     <c:remove var="mensaje" />
+                    ${img}
                 </div>
             </div>
         </div>
