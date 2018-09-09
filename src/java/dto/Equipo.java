@@ -1,5 +1,5 @@
 package dto;
-// Generated 04-09-2018 13:49:56 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 17:10:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -17,27 +17,24 @@ public class Equipo  implements java.io.Serializable {
      private Usuario usuario;
      private String nombreEquipo;
      private byte estadoEquipo;
-     private Set<Imagen> imagens = new HashSet<Imagen>(0);
      private Set<Integrantes> integranteses = new HashSet<Integrantes>(0);
 
     public Equipo() {
     }
 
 	
-    public Equipo(Liga liga, TipoLiga tipoLiga, Usuario usuario, String nombreEquipo, byte estadoEquipo) {
-        this.liga = liga;
+    public Equipo(TipoLiga tipoLiga, Usuario usuario, String nombreEquipo, byte estadoEquipo) {
         this.tipoLiga = tipoLiga;
         this.usuario = usuario;
         this.nombreEquipo = nombreEquipo;
         this.estadoEquipo = estadoEquipo;
     }
-    public Equipo(Liga liga, TipoLiga tipoLiga, Usuario usuario, String nombreEquipo, byte estadoEquipo, Set<Imagen> imagens, Set<Integrantes> integranteses) {
+    public Equipo(Liga liga, TipoLiga tipoLiga, Usuario usuario, String nombreEquipo, byte estadoEquipo, Set<Integrantes> integranteses) {
        this.liga = liga;
        this.tipoLiga = tipoLiga;
        this.usuario = usuario;
        this.nombreEquipo = nombreEquipo;
        this.estadoEquipo = estadoEquipo;
-       this.imagens = imagens;
        this.integranteses = integranteses;
     }
    
@@ -82,13 +79,6 @@ public class Equipo  implements java.io.Serializable {
     
     public void setEstadoEquipo(byte estadoEquipo) {
         this.estadoEquipo = estadoEquipo;
-    }
-    public Set<Imagen> getImagens() {
-        return this.imagens;
-    }
-    
-    public void setImagens(Set<Imagen> imagens) {
-        this.imagens = imagens;
     }
     public Set<Integrantes> getIntegranteses() {
         return this.integranteses;

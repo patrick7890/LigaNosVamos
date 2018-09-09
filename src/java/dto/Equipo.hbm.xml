@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-09-2018 13:49:57 by Hibernate Tools 4.3.1 -->
+<!-- Generated 09-09-2018 17:10:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="dto.Equipo" table="equipo" catalog="nosvamos" optimistic-lock="version">
         <id name="idEquipo" type="java.lang.Integer">
@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="liga" class="dto.Liga" fetch="select">
-            <column name="liga_id_liga" not-null="true" />
+            <column name="liga_id_liga" />
         </many-to-one>
         <many-to-one name="tipoLiga" class="dto.TipoLiga" fetch="select">
             <column name="tipo_liga_idtipo_liga" not-null="true" />
@@ -23,12 +23,6 @@
         <property name="estadoEquipo" type="byte">
             <column name="estado_equipo" not-null="true" />
         </property>
-        <set name="imagens" table="imagen" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="equipo_id_equipo" />
-            </key>
-            <one-to-many class="dto.Imagen" />
-        </set>
         <set name="integranteses" table="integrantes" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="equipo_id_equipo" not-null="true" />

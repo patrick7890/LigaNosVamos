@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-09-2018 13:49:57 by Hibernate Tools 4.3.1 -->
+<!-- Generated 09-09-2018 17:10:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="dto.Integrantes" table="integrantes" catalog="nosvamos" optimistic-lock="version">
         <id name="rutIntegrante" type="string">
@@ -20,11 +20,5 @@
         <property name="estadoInt" type="byte">
             <column name="estado_int" not-null="true" />
         </property>
-        <set name="imagens" table="imagen" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="integrantes_rut_integrante" length="13" />
-            </key>
-            <one-to-many class="dto.Imagen" />
-        </set>
     </class>
 </hibernate-mapping>

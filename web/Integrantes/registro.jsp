@@ -28,7 +28,6 @@
                                     <label>Rut: </label>
                                     <input type="text" name="txtRut" placeholder="Ej:xx.xxx.xxx-x" minlength="6" class="form-control"/>
                                 </div>
-
                                 <div class="form-group">
                                     <label>Nombre: </label>
                                     <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
@@ -42,23 +41,9 @@
                                     <label>Ingrese la Imagen de Jugador </label>
                                     <input class="btn btn-default" type="file" name="selec" value=""  />
                                 </div>
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <div class="form-group ">
                                     <button class="btn btn-primary" type="submit"  name="btnAccion" ><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
-                                
-                                
-                                
-                                
-                                
                             </div>
                         </div>
                     </form>
