@@ -79,14 +79,14 @@ public class DAOEquipo {
     public Equipo buscar(Object o) {
         try {
             iniOperacion();
-            List<Equipo> lista = session.createQuery("from Equipo where nombre_equipo="+o).list();
+            List<Equipo> lista = session.createQuery("from Equipo where nombre_equipo='"+o+"'").list();
             for ( Equipo equ : lista ) {
                 return equ;
             }
         } catch (Exception e) {
             tx.rollback();
             session.close();
-            throw new RuntimeException("No se pudo beqcar el Equipo: " + e.getMessage());
+            throw new RuntimeException("No se pudo encontrar el Equipo: " + e.getMessage());
         }
         return null;
     }
@@ -131,7 +131,7 @@ public class DAOEquipo {
     public List<Equipo> listarEquipoLiga(Object o) {
         try {
             iniOperacion();
-            List<Equipo> lista = session.createQuery("from Equipo where nombre_liga="+o).list();
+            List<Equipo> lista = session.createQuery("from Equipo where nombre_liga='"+o+"'").list();
             return lista;
         } catch (Exception e) {
             tx.rollback();

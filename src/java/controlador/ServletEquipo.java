@@ -68,6 +68,9 @@ public class ServletEquipo extends HttpServlet {
             case "Actualizar":
                 actualizar(request, response);
                 break;
+            case "Inscribir":
+                inscribir(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -179,28 +182,22 @@ public class ServletEquipo extends HttpServlet {
             response.sendRedirect("Equipos/estadoEquipo.jsp");
         }
     }
-    
-   
-    
-    
 
     private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
 
-           
             String nombre = request.getParameter("ddlEquipo");
             String nombreLiga = request.getParameter("txtNombreLiga");
-            
+
             byte estado = 1;
             DAOEquipo dao = new DAOEquipo();
             DAOLiga daoL = new DAOLiga();
-            
-            
+
             Liga l = daoL.buscar(nombreLiga);
             Equipo e = dao.buscar(nombre);
-            
+
             e.setLiga(l);
-            
+
             if (dao.buscar(nombre) != null) {
                 if (dao.actualizar(e)) {
                     String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";
@@ -228,7 +225,7 @@ public class ServletEquipo extends HttpServlet {
             isMultipart = ServletFileUpload.isMultipartContent(request);
             response.setContentType("text/html;charset=UTF-8");
             java.io.PrintWriter out = response.getWriter();
-             if (!isMultipart) {
+            if (!isMultipart) {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Servlet upload</title>");
@@ -238,15 +235,15 @@ public class ServletEquipo extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             }
-
+            String User = System.getProperty("user.name");
             // maximum size that will be stored in memory
-            String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
+            String archivourl = "C:\\Users\\" + User + "\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setSizeThreshold(maxMemSize);
 
             // Location to save data that is larger than maxMemSize.
-            factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
+            factory.setRepository(new File("C:\\Users\\" + User + "\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
 
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -272,6 +269,41 @@ public class ServletEquipo extends HttpServlet {
         } catch (Exception ex) {
             String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + ex.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
+        }
+    }
+
+    private void inscribir(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String nombre = request.getParameter("ddlEquipo");
+            String nombreLiga = request.getParameter("txtNombreLiga");
+            String tipo = request.getParameter("txtTipoLiga");
+            String correo = request.getParameter("correo");
+            Usuario u = new DAOUsuario().buscarCorreo(correo);
+            DAOEquipo dao = new DAOEquipo();
+            DAOLiga daoL = new DAOLiga();
+            TipoLiga ti = dao.buscarTipo(tipo);
+
+            Liga l = daoL.buscar(nombreLiga);
+            Equipo e = dao.buscar(nombre);
+            byte estado = 1;
+            if (e != null && l != null) {
+                Equipo eq = new Equipo(nombre, l, ti, u, estado);
+                if (dao.actualizar(eq)) {
+                    String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                } else {
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                }
+            } else {
+                String mensaje = "<div class='alert alert-danger text-center'>El correo ya esta registrado</div>";
+                request.getSession().setAttribute("mensaje", mensaje);
+            }
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + e.getMessage() + "</div>";
+            request.getSession().setAttribute("mensaje", mensaje);
+        } finally {
+            response.sendRedirect("Ligas/inscribir.jsp");
         }
     }
 

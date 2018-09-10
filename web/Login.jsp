@@ -19,7 +19,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="ProcesoUsuario" method="GET">
+                        <form action="ProcesoUsuario" method="POST">
                             <div class="card" style="margin-top: 20%">
                                 <div class="card-body">
                                     <h1 class="text-center">Login</h1>

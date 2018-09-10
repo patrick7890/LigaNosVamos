@@ -80,7 +80,7 @@ public class DAOLiga {
     public Liga buscar(Object o) {
         try {
             iniOperacion();
-            List<Liga> lista = session.createQuery("from Liga where nombreLiga="+o).list();
+            List<Liga> lista = session.createQuery("from Liga where nombreLiga='"+o+"'").list();
             for ( Liga lig : lista ) {
                 return lig;
             }
