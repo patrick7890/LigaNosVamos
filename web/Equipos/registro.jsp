@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="../ProcesoEquipo" method="POST" enctype="multipart/form-data">
+                        <form action="../ProcesoEquipo" method="POST">
                             <div class="card" style="">
                                 <div class="card-body">
                                     <h1 class="text-center">Registro De Equipo</h1>
@@ -36,8 +36,18 @@
                                 </div>
                                 <div class="form-group ">
                                     <label>Ingrese la Imagen de Equipo </label>
-                                    <input class="btn btn-default" type="file" name="selec" value=""  />
+                                    <input class="btn btn-default" type="file" name="selec" value="" enctype="multipart/form-data" onchange="loadFile(event)" />
                                 </div>
+                                <div class="form-group">
+                                    <img id="output"/>
+                                    <script>
+                                        var loadFile = function (event) {
+                                            var output = document.getElementById('output');
+                                            output.src = URL.createObjectURL(event.target.files[0]);
+                                        };
+                                    </script>
+                                </div>
+
                                 <div class="form-group">
                                     <label>Tipo Liga: </label>
                                     <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>

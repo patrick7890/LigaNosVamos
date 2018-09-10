@@ -16,6 +16,7 @@ import dto.TipoLiga;
 import dto.Usuario;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ public class ServletEquipo extends HttpServlet {
     private boolean isMultipart;
     private int maxFileSize = 50 * 1024;
     private int maxMemSize = 4 * 1024;
+    InputStream is = null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -118,14 +120,51 @@ public class ServletEquipo extends HttpServlet {
             Usuario usu = daoUsu.buscarCorreo(nombreUsu);
             TipoLiga ti = dao.buscarTipo(tipo);
             Equipo e = new Equipo(nombre, null, ti, usu, estado);
-
             if (dao.agregar(e)) {
-                imagen(request, response, nombre);
-                DAOImagen im = new DAOImagen();
-                Imagen imagen = new Imagen();
-                imagen.setImagen("Equipo-" + nombre + ".jpg");
-                imagen.setEquipo(e);
-                im.agregarI(imagen);
+                //imagen(request, response, e);
+
+                isMultipart = ServletFileUpload.isMultipartContent(request);
+                response.setContentType("text/html;charset=UTF-8");
+                java.io.PrintWriter out = response.getWriter();
+
+                if (!isMultipart) {
+                    out.println("<html>");
+                    out.println("<head>");
+                    out.println("<title>Servlet upload</title>");
+                    out.println("</head>");
+                    out.println("<body>");
+                    out.println("<p>No file uploaded</p>");
+                    out.println("</body>");
+                    out.println("</html>");
+                    return;
+                }
+
+                // maximum size that will be stored in memory
+                String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
+
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                factory.setSizeThreshold(maxMemSize);
+
+                // Location to save data that is larger than maxMemSize.
+                factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
+
+                // Create a new file upload handler
+                ServletFileUpload upload = new ServletFileUpload(factory);
+
+                // maximum file size to be uploaded.
+                upload.setSizeMax(maxFileSize);
+
+                factory.setSizeThreshold(1024);
+
+                factory.setRepository(new File(archivourl));
+
+                List<FileItem> partes = upload.parseRequest(request);
+
+                for (FileItem items : partes) {
+                    File file = new File(archivourl, "img1.jpg");
+                    items.write(file);
+                }
+                out.print("<h2>ARCHIVO CORRECTAMENTE SUBIDO.....</h2>" + "\n\n" + "<a href='index.jsp'>VOVLER AL MENU</a>");
 
                 String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -216,8 +255,13 @@ public class ServletEquipo extends HttpServlet {
         }
     }
 
-    private void imagen(HttpServletRequest request, HttpServletResponse response, String nombre) {
+    private void imagen(HttpServletRequest request, HttpServletResponse response, Equipo e) throws ServletException, IOException {
+
         try {
+
+            Imagen i = new Imagen("Equipo-" + e.getNombreEquipo(), e, null, null);
+            DAOImagen daoimagen = new DAOImagen();
+            daoimagen.agregarI(i);
 
             isMultipart = ServletFileUpload.isMultipartContent(request);
             response.setContentType("text/html;charset=UTF-8");
@@ -254,24 +298,17 @@ public class ServletEquipo extends HttpServlet {
 
             factory.setRepository(new File(archivourl));
 
-            try {
+            List<FileItem> partes = upload.parseRequest(request);
 
-                List<FileItem> partes = upload.parseRequest(request);
+            for (FileItem items : partes) {
 
-                for (FileItem items : partes) {
-                    File file = new File(archivourl, "Equipo-" + nombre + ".jpg");
-                    items.write(file);
-
-                }
-                out.print("<h2>ARCHIVO CORRECTAMENTE SUBIDO.....</h2>" + "\n\n" + "<a href='index.jsp'>VOVLER AL MENU</a>");
-
-            } catch (Exception e) {
-                out.print("Exception: " + e.getMessage() + "");
+                File file = new File(archivourl, "Equipo-" + e.getNombreEquipo());
+                items.write(file);
             }
 
-        } catch (Exception e) {
-        }
+        } catch (Exception ex) {
 
+        }
     }
 
 }
