@@ -32,7 +32,7 @@
                 <c:forEach var="list" items="${lista}">
                     <div class=" col-12 col-sm-12 col-md-6 col-xl-4 mt-2 " style="height: 100px" >
                         <form>
-                            <a href="Ligas/listaEquipos.jsp?${list.getNombreLiga()}">
+                            <a href="Ligas/listaEquipos.jsp? ${list.getNombreLiga()}">
                                 <div class="thumbnail group group-thumbnail"  style="height: 100px" >
                                     <style>
                                         .group-thumbnail{

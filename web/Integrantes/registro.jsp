@@ -4,6 +4,7 @@
     Author     : Lennon
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,45 +12,96 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrar Integrantes</title>
     </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
     <body>
-        <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
-        
-        
-        <!--inicio del contenido-->
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-sm-6">
-                    <form action="" method="GET">
-                        <div class="card" style="">
-                            <div class="card-body">
-                                <h1 class="text-center">Registro De Itengrantes</h1>
-                                <hr>
-                                <div class="form-group">
-                                    <label>Rut: </label>
-                                    <input type="text" name="txtRut" placeholder="Ej:xx.xxx.xxx-x" minlength="6" class="form-control"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nombre: </label>
-                                    <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
-                                </div>
+        <jsp:useBean id="equ" class="DAO.DAOEquipo" scope="page" ></jsp:useBean>
+        <jsp:useBean id="liga" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
+        <c:set  var="equipo"  value="${equ.listarTodo()}"/>
+        <c:set  var="li"  value="${liga.listarTodo()}"/>
+        <c:set var="correo" value="${sesUsu.getCorreoUsuario()}"/> 
+        <c:set  var="equipoUsu"  value="${equ.listarEquipoUsuario(correo)}"/>
+        <c:choose>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
+                <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
+                    <div class="container">
+                        <div class="row">
+                            <form action="../ProcesoIntegrantes" method="GET" >
+                                <table class="table table-hover">
+                                    <thead>
+                                        
+                                    <th></th>
+                                    <th>RUT</th>
+                                    <th>Nombre</th>
+                                    <th>Nick</th>
+                                    
+                                    </thead>
+                                <c:forEach  varStatus="lis" begin = "1" end="5" >
+                                    <tr>
+                                        <td>Integrante ${lis.index}</td>
+                                        <td> <input type="text" value="" name="txtRut${lis.index}"  /></td>
+                                        <td> <input type="text" value="" name="txtNombre${lis.index}"  /></td>
+                                        <td> <input type="text" value="" name="txtNick${lis.index}" /></td>
 
-                                <div class="form-group">
-                                    <label>Nick: </label>
-                                    <input type="text" name="txtNick" placeholder="Ej:X_X" minlength="4" class="form-control"/>
-                                </div>
-                                <div class="form-group ">
-                                    <label>Ingrese la Imagen de Jugador </label>
-                                    <input class="btn btn-default" type="file" name="selec" value=""  />
-                                </div>
-                                <div class="form-group ">
-                                    <button class="btn btn-primary" type="submit"  name="btnAccion" ><i class="far fa-fw fa-save"></i>Registar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                        <td>${list.getTipoLiga().getDescripcion()}</td>
+
+                                    <input type="hidden" value="${list.getNombreLiga()}" name="txtNombreLiga" />
+                                    <input type="hidden" value="${list.getTipoLiga().getIdtipoLiga()}" name="txtTipoLiga" />
+                                    </tr>
+                                </c:forEach>
+                                <tr>
+                                    <td>Integrante 6</td>
+                                    <td> <input type="text" value="" name="txtRut6" /></td>
+                                    <td> <input type="text" value="" name="txtNombre6" /></td>
+                                    <td> <input type="text" value="" name="txtNick6" /></td>
+
+                                    <td>${list.getTipoLiga().getDescripcion()}</td>
+
+                                <input type="hidden" value="${list.getNombreLiga()}" name="txtNombreLiga" />
+                                <input type="hidden" value="${list.getTipoLiga().getIdtipoLiga()}" name="txtTipoLiga" />
+                                </tr>
+                                <tr>
+                                    <td>Integrante 7</td>
+                                    <td> <input type="text" value="" name="txtRut7" /></td>
+
+                                    <td> <input type="text" value="" name="txtNombre7" /></td>
+
+                                    <td> <input type="text" value="" name="txtNick7" /></td>
+
+                                    <td>${list.getTipoLiga().getDescripcion()}</td>
+
+                                <input type="hidden" value="${list.getNombreLiga()}" name="txtNombreLiga" />
+                                <input type="hidden" value="${list.getTipoLiga().getIdtipoLiga()}" name="txtTipoLiga" />
+                                </tr>
+
+
+
+                                <input type="hidden" value="${sesUsu.getCorreoUsuario()}" name="correo" />
+
+                                </td>                    
+
+
+
+                            </table>
+                            <div class="text-center">
+                                <button class="btn btn-primary" value="Registar" name="btnAccion">Inscribir</button>
+                                <select name="ddlEquipo">
+                                    <c:forEach var="lista" items="${equipoUsu}" >
+                                        <option value="${lista.getNombreEquipo()}">${lista.getNombreEquipo()} </option>
+                                    </c:forEach>
+                                </select> </div>
+                        </form>
+
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!--fin del contenido-->
+            </c:when>
+
+        </c:choose>
+        <c:if test="${mensaje!=null}" >
+            ${mensaje}
+        </c:if>
+        <c:remove var="mensaje" />
     </body>
 </html>

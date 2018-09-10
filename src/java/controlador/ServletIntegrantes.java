@@ -5,6 +5,13 @@
  */
 package controlador;
 
+import DAO.DAOEquipo;
+import DAO.DAOIntegrantes;
+import DAO.DAOUsuario;
+import dto.Equipo;
+import dto.Integrantes;
+import dto.TipoLiga;
+import dto.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,41 +50,27 @@ public class ServletIntegrantes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         response.setContentType("text/html;charset=UTF-8");
-        
+        String opcion = request.getParameter("btnAccion");
 
-        // maximum size that will be stored in memory
-        String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(maxMemSize);
-
-        // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
-
-        // Create a new file upload handler
-        ServletFileUpload upload = new ServletFileUpload(factory);
-
-        // maximum file size to be uploaded.
-        upload.setSizeMax(maxFileSize);
-
-        factory.setSizeThreshold(1024);
-
-        factory.setRepository(new File(archivourl));
-
-        try {
-
-            List<FileItem> partes = upload.parseRequest(request);
-
-            for (FileItem items : partes) {
-                File file = new File(archivourl, "img1.jpg");
-                items.write(file);
-            }
-            
-        } catch (Exception e) {
-            
+        switch (opcion) {
+            case "Registar":
+                agregar(request, response);
+                break;
+            case "Eliminar":
+                eliminar(request, response);
+                break;
+            case "Listar":
+                listar(request, response);
+                break;
+            case "Actualizar":
+                actualizar(request, response);
+                break;
+            default:
+                throw new AssertionError();
         }
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -118,5 +111,92 @@ public class ServletIntegrantes extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void agregar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        try {
+            String equipo = request.getParameter("ddlEquipo");
+            Equipo e = new DAOEquipo().buscar(equipo);
+            for (int i = 1; i < 2; i++) {
+                String rut = request.getParameter("txtRut"+i);
+                String nombre = request.getParameter("txtNombre"+i);
+                String nick = request.getParameter("txtNick"+i);
+                byte estado = 1;
+                
+
+                Integrantes in = new Integrantes(rut, e, nombre, nick, estado);
+
+                DAOIntegrantes daoI = new DAOIntegrantes();
+
+                if (daoI.agregar(in)) {
+                    //imagen(request, response, in);
+
+                    String mensaje = "<div class='alert alert-success text-center'>Intengrante Agregado</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+
+                } else {
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                }
+
+            }
+
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
+            request.getSession().setAttribute("mensaje", mensaje);
+        } finally {
+            response.sendRedirect("Integrantes/registro.jsp");
+        }
+
+    }
+
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void listar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void actualizar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void imagen(HttpServletRequest request, HttpServletResponse response, Integrantes in) {
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        // maximum size that will be stored in memory
+        String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(maxMemSize);
+
+        // Location to save data that is larger than maxMemSize.
+        factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
+
+        // Create a new file upload handler
+        ServletFileUpload upload = new ServletFileUpload(factory);
+
+        // maximum file size to be uploaded.
+        upload.setSizeMax(maxFileSize);
+
+        factory.setSizeThreshold(1024);
+
+        factory.setRepository(new File(archivourl));
+
+        try {
+
+            List<FileItem> partes = upload.parseRequest(request);
+
+            for (FileItem items : partes) {
+                File file = new File(archivourl, "img1.jpg");
+                items.write(file);
+            }
+
+        } catch (Exception e) {
+
+        }
+    }
 
 }

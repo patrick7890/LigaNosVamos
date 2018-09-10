@@ -1,37 +1,31 @@
 <%-- 
-    Document   : listaEquipos
-    Created on : 08-09-2018, 15:48:20
-    Author     : Patricio
+    Document   : vistaEquipo
+    Created on : 10-09-2018, 18:34:05
+    Author     : Lennon
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script type="text/javascript">
-            var str = window.location.search;
-            alert(str);
-        </script>
     </head>
     <body>
-
-       
+        
         <c:choose>
             <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
-                <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
+                <jsp:include page="Menus/menu_Usuario.jsp"></jsp:include>
             </c:when>
             <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()<=2}">
-                <jsp:include page="../Menus/menu_Admin.jsp"></jsp:include>
+                <jsp:include page="Menus/menu_Admin.jsp"></jsp:include>
             </c:when>
             <c:when test="${sesUsu==null}">
-                <jsp:include page="../Menus/menu.jsp"></jsp:include>
+                <jsp:include page="Menus/menu.jsp"></jsp:include>
             </c:when>
         </c:choose>
         <div class="form-group" style="margin: 1%">
-            <jsp:useBean id="li" class="DAO.DAOEquipo" scope="page" ></jsp:useBean>
+            <jsp:useBean id="li" class="DAO.DAOLiga" scope="page" ></jsp:useBean>
             <c:set  var="lista"  value="${li.listarTodo()}"/>
             <div class="row">
                 <c:forEach var="list" items="${lista}">
@@ -63,7 +57,7 @@
                 </c:forEach>
             </div>
         </div>
-        
+
         
         
         
