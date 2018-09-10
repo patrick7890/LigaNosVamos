@@ -104,9 +104,9 @@ public class ServletEquipo extends HttpServlet {
             byte estado = 1;
             DAOEquipo dao = new DAOEquipo();
             DAOUsuario daoUsu = new DAOUsuario();
-            Usuario usu = daoUsu.buscar(nombreUsu);
+            Usuario usu = daoUsu.buscarCorreo(nombreUsu);
             TipoLiga ti = dao.buscarTipo(tipo);
-            Equipo e = new Equipo(null, ti, usu, nombre, estado);
+            Equipo e = new Equipo(nombre, null, ti, usu, estado);
             if (dao.agregar(e)) {
                 String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -168,15 +168,15 @@ public class ServletEquipo extends HttpServlet {
             String var2 = request.getParameter("txt");
             String var4 = request.getParameter("txt");
             String tipo = request.getParameter("ddlTipo");
-            String estado = request.getParameter("txt");
+            byte estado=1 ;
             DAOEquipo dao = new DAOEquipo();
             DAOLiga daoL = new DAOLiga();
             Liga l = daoL.buscar(var1);
             DAOUsuario daoUsu = new DAOUsuario();
-            Usuario usu = daoUsu.buscar(var2);
+            Usuario usu = daoUsu.buscarCorreo(var2);
             TipoLiga ti = dao.buscarTipo(tipo);
-            Equipo e = new Equipo(l, ti, usu, var4, Byte.parseByte(estado));
-            e.setIdEquipo(var);
+            Equipo e = new Equipo(var1,null, ti, usu, estado);
+            e.setNombreEquipo(var1);
             if (dao.buscar(var) != null) {
                 if (dao.actualizar(e)) {
                     String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";

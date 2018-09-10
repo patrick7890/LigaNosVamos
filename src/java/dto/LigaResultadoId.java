@@ -1,5 +1,5 @@
 package dto;
-// Generated 09-09-2018 17:10:23 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 22:57:04 by Hibernate Tools 4.3.1
 
 
 
@@ -9,23 +9,23 @@ package dto;
 public class LigaResultadoId  implements java.io.Serializable {
 
 
-     private int ligaIdLiga;
+     private String ligaNombreLiga;
      private int resultadosIdResultados;
 
     public LigaResultadoId() {
     }
 
-    public LigaResultadoId(int ligaIdLiga, int resultadosIdResultados) {
-       this.ligaIdLiga = ligaIdLiga;
+    public LigaResultadoId(String ligaNombreLiga, int resultadosIdResultados) {
+       this.ligaNombreLiga = ligaNombreLiga;
        this.resultadosIdResultados = resultadosIdResultados;
     }
    
-    public int getLigaIdLiga() {
-        return this.ligaIdLiga;
+    public String getLigaNombreLiga() {
+        return this.ligaNombreLiga;
     }
     
-    public void setLigaIdLiga(int ligaIdLiga) {
-        this.ligaIdLiga = ligaIdLiga;
+    public void setLigaNombreLiga(String ligaNombreLiga) {
+        this.ligaNombreLiga = ligaNombreLiga;
     }
     public int getResultadosIdResultados() {
         return this.resultadosIdResultados;
@@ -42,14 +42,14 @@ public class LigaResultadoId  implements java.io.Serializable {
 		 if ( !(other instanceof LigaResultadoId) ) return false;
 		 LigaResultadoId castOther = ( LigaResultadoId ) other; 
          
-		 return (this.getLigaIdLiga()==castOther.getLigaIdLiga())
+		 return ( (this.getLigaNombreLiga()==castOther.getLigaNombreLiga()) || ( this.getLigaNombreLiga()!=null && castOther.getLigaNombreLiga()!=null && this.getLigaNombreLiga().equals(castOther.getLigaNombreLiga()) ) )
  && (this.getResultadosIdResultados()==castOther.getResultadosIdResultados());
    }
    
    public int hashCode() {
          int result = 17;
          
-         result = 37 * result + this.getLigaIdLiga();
+         result = 37 * result + ( getLigaNombreLiga() == null ? 0 : this.getLigaNombreLiga().hashCode() );
          result = 37 * result + this.getResultadosIdResultados();
          return result;
    }   

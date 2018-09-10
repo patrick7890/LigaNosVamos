@@ -43,8 +43,7 @@ public class DAOLiga {
     public boolean actualizar(Liga li) {
         try {
             iniOperacion();
-            Liga lig = buscar(li.getIdLiga());
-            lig.setNombreLiga(li.getNombreLiga());
+            Liga lig = buscar(li.getNombreLiga());
             lig.setFechaInicio(li.getFechaInicio());
             lig.setFechaTermino(li.getFechaTermino());
             lig.setLugar(li.getLugar());
@@ -81,7 +80,7 @@ public class DAOLiga {
     public Liga buscar(Object o) {
         try {
             iniOperacion();
-            List<Liga> lista = session.createQuery("from Liga where IdLiga="+o).list();
+            List<Liga> lista = session.createQuery("from Liga where nombreLiga="+o).list();
             for ( Liga lig : lista ) {
                 return lig;
             }

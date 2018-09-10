@@ -1,19 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09-09-2018 17:10:24 by Hibernate Tools 4.3.1 -->
+<!-- Generated 09-09-2018 22:57:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="dto.Liga" table="liga" catalog="nosvamos" optimistic-lock="version">
-        <id name="idLiga" type="java.lang.Integer">
-            <column name="id_liga" />
-            <generator class="identity" />
+        <id name="nombreLiga" type="string">
+            <column name="nombre_liga" length="45" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="tipoLiga" class="dto.TipoLiga" fetch="select">
             <column name="tipo_liga_idtipo_liga" not-null="true" />
         </many-to-one>
-        <property name="nombreLiga" type="string">
-            <column name="nombre_liga" length="45" not-null="true" />
-        </property>
         <property name="fechaInicio" type="date">
             <column name="fecha_inicio" length="10" not-null="true" />
         </property>
@@ -23,15 +20,21 @@
         <property name="lugar" type="string">
             <column name="lugar" length="45" not-null="true" />
         </property>
+        <set name="imagens" table="imagen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="liga_nombre_liga" length="45" not-null="true" />
+            </key>
+            <one-to-many class="dto.Imagen" />
+        </set>
         <set name="equipos" table="equipo" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="liga_id_liga" />
+                <column name="liga_nombre_liga" length="45" not-null="true" />
             </key>
             <one-to-many class="dto.Equipo" />
         </set>
         <set name="ligaResultados" table="liga_resultado" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="liga_id_liga" not-null="true" />
+                <column name="liga_nombre_liga" length="45" not-null="true" />
             </key>
             <one-to-many class="dto.LigaResultado" />
         </set>

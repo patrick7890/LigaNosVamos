@@ -1,24 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09-09-2018 17:10:24 by Hibernate Tools 4.3.1 -->
+<!-- Generated 09-09-2018 22:57:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="dto.Imagen" table="imagen" catalog="nosvamos" optimistic-lock="version">
-        <id name="idImagen" type="java.lang.Integer">
-            <column name="id_imagen" />
-            <generator class="identity" />
+        <id name="imagen" type="string">
+            <column name="imagen" length="45" />
+            <generator class="assigned" />
         </id>
-        <property name="equipoIdEquipo" type="java.lang.Integer">
-            <column name="equipo_id_equipo" />
-        </property>
-        <property name="integrantesRutIntegrante" type="string">
-            <column name="integrantes_rut_integrante" length="13" />
-        </property>
-        <property name="ligaIdLiga" type="java.lang.Integer">
-            <column name="liga_id_liga" />
-        </property>
-        <property name="imagen" type="string">
-            <column name="imagen" length="45" not-null="true" />
-        </property>
+        <many-to-one name="equipo" class="dto.Equipo" fetch="select">
+            <column name="equipo_nombre_equipo" length="45" />
+        </many-to-one>
+        <many-to-one name="integrantes" class="dto.Integrantes" fetch="select">
+            <column name="integrantes_rut_integrante" length="13" not-null="true" />
+        </many-to-one>
+        <many-to-one name="liga" class="dto.Liga" fetch="select">
+            <column name="liga_nombre_liga" length="45" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

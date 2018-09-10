@@ -1,5 +1,5 @@
 package dto;
-// Generated 09-09-2018 17:10:23 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 22:57:04 by Hibernate Tools 4.3.1
 
 
 
@@ -9,60 +9,54 @@ package dto;
 public class Imagen  implements java.io.Serializable {
 
 
-     private Integer idImagen;
-     private Integer equipoIdEquipo;
-     private String integrantesRutIntegrante;
-     private Integer ligaIdLiga;
      private String imagen;
+     private Equipo equipo;
+     private Integrantes integrantes;
+     private Liga liga;
 
     public Imagen() {
     }
 
 	
-    public Imagen(String imagen) {
+    public Imagen(String imagen, Integrantes integrantes, Liga liga) {
         this.imagen = imagen;
+        this.integrantes = integrantes;
+        this.liga = liga;
     }
-    public Imagen(Integer equipoIdEquipo, String integrantesRutIntegrante, Integer ligaIdLiga, String imagen) {
-       this.equipoIdEquipo = equipoIdEquipo;
-       this.integrantesRutIntegrante = integrantesRutIntegrante;
-       this.ligaIdLiga = ligaIdLiga;
+    public Imagen(String imagen, Equipo equipo, Integrantes integrantes, Liga liga) {
        this.imagen = imagen;
+       this.equipo = equipo;
+       this.integrantes = integrantes;
+       this.liga = liga;
     }
    
-    public Integer getIdImagen() {
-        return this.idImagen;
-    }
-    
-    public void setIdImagen(Integer idImagen) {
-        this.idImagen = idImagen;
-    }
-    public Integer getEquipoIdEquipo() {
-        return this.equipoIdEquipo;
-    }
-    
-    public void setEquipoIdEquipo(Integer equipoIdEquipo) {
-        this.equipoIdEquipo = equipoIdEquipo;
-    }
-    public String getIntegrantesRutIntegrante() {
-        return this.integrantesRutIntegrante;
-    }
-    
-    public void setIntegrantesRutIntegrante(String integrantesRutIntegrante) {
-        this.integrantesRutIntegrante = integrantesRutIntegrante;
-    }
-    public Integer getLigaIdLiga() {
-        return this.ligaIdLiga;
-    }
-    
-    public void setLigaIdLiga(Integer ligaIdLiga) {
-        this.ligaIdLiga = ligaIdLiga;
-    }
     public String getImagen() {
         return this.imagen;
     }
     
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+    public Equipo getEquipo() {
+        return this.equipo;
+    }
+    
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+    public Integrantes getIntegrantes() {
+        return this.integrantes;
+    }
+    
+    public void setIntegrantes(Integrantes integrantes) {
+        this.integrantes = integrantes;
+    }
+    public Liga getLiga() {
+        return this.liga;
+    }
+    
+    public void setLiga(Liga liga) {
+        this.liga = liga;
     }
 
 

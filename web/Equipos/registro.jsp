@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label>Nombre De Equipo: </label>
                                         <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
-                                        <input type="hidden" name="txtNombreUsu" value="${sesUsu.getIdUsuario()}"/>
+                                        <input type="hidden" name="txtNombreUsu" value="${sesUsu.getCorreoUsuario()}"/>
                                 </div>
                                 <div class="form-group ">
                                     <label>Ingrese la Imagen de Equipo </label>

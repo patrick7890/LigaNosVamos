@@ -59,10 +59,9 @@ public class DAOUsuario {
     public boolean actualizar(Usuario us) {
         try {
             iniOperacion();
-            Usuario usu = buscar(us.getIdUsuario());
+            Usuario usu = buscarCorreo(us.getCorreoUsuario());
             usu.setNombreUsuario(us.getNombreUsuario());
             usu.setPassUsuario(us.getPassUsuario());
-            usu.setCorreoUsuario(us.getCorreoUsuario());
             usu.setEquipos(us.getEquipos());
             usu.setTipoUsuario(us.getTipoUsuario());
             session.update(usu);
@@ -77,10 +76,10 @@ public class DAOUsuario {
     }
 
     
-    public boolean eliminar(Object o) {
+    public boolean eliminar(String o) {
         try {
             iniOperacion();
-            Usuario usu = buscar(o);
+            Usuario usu = buscarCorreo(o);
             session.delete(usu);
             tx.commit();
             session.close();
@@ -93,20 +92,6 @@ public class DAOUsuario {
     }
 
     
-    public Usuario buscar(Object o) {
-        try {
-            iniOperacion();
-            List<Usuario> lista = session.createQuery("from Usuario where id_usuario='"+o+"'").list();
-            for ( Usuario usu : lista ) {
-                return usu;
-            }
-        } catch (Exception e) {
-            tx.rollback();
-            session.close();
-            throw new RuntimeException("No se pudo buscar el Usuario: " + e.getMessage());
-        }
-        return null;
-    }
     public Usuario buscarCorreo(String correo) {
         try {
             iniOperacion();

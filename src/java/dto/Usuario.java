@@ -1,5 +1,5 @@
 package dto;
-// Generated 09-09-2018 17:10:23 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 22:57:04 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,10 +11,9 @@ import java.util.Set;
 public class Usuario  implements java.io.Serializable {
 
 
-     private Integer idUsuario;
+     private String correoUsuario;
      private TipoUsuario tipoUsuario;
      private String nombreUsuario;
-     private String correoUsuario;
      private String passUsuario;
      private Set<Equipo> equipos = new HashSet<Equipo>(0);
 
@@ -22,26 +21,26 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(TipoUsuario tipoUsuario, String nombreUsuario, String correoUsuario, String passUsuario) {
+    public Usuario(String correoUsuario, TipoUsuario tipoUsuario, String nombreUsuario, String passUsuario) {
+        this.correoUsuario = correoUsuario;
         this.tipoUsuario = tipoUsuario;
         this.nombreUsuario = nombreUsuario;
-        this.correoUsuario = correoUsuario;
         this.passUsuario = passUsuario;
     }
-    public Usuario(TipoUsuario tipoUsuario, String nombreUsuario, String correoUsuario, String passUsuario, Set<Equipo> equipos) {
+    public Usuario(String correoUsuario, TipoUsuario tipoUsuario, String nombreUsuario, String passUsuario, Set<Equipo> equipos) {
+       this.correoUsuario = correoUsuario;
        this.tipoUsuario = tipoUsuario;
        this.nombreUsuario = nombreUsuario;
-       this.correoUsuario = correoUsuario;
        this.passUsuario = passUsuario;
        this.equipos = equipos;
     }
    
-    public Integer getIdUsuario() {
-        return this.idUsuario;
+    public String getCorreoUsuario() {
+        return this.correoUsuario;
     }
     
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
     public TipoUsuario getTipoUsuario() {
         return this.tipoUsuario;
@@ -56,13 +55,6 @@ public class Usuario  implements java.io.Serializable {
     
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-    public String getCorreoUsuario() {
-        return this.correoUsuario;
-    }
-    
-    public void setCorreoUsuario(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
     }
     public String getPassUsuario() {
         return this.passUsuario;

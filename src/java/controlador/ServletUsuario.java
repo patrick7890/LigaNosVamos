@@ -107,7 +107,7 @@ public class ServletUsuario extends HttpServlet {
             String tipo = request.getParameter("ddlTipo");
             DAOUsuario dao = new DAOUsuario();
             TipoUsuario ti = dao.buscarTipo(tipo);
-            Usuario usuario = new Usuario(ti, nombre, correo, pass);
+            Usuario usuario = new Usuario(correo, ti, nombre, pass);
             if (dao.buscarCorreo(correo) == null) {
                 if (dao.agregar(usuario)) {
                     String mensaje = "<div class='alert alert-success text-center'>Usuario Agregado</div>";
@@ -131,9 +131,9 @@ public class ServletUsuario extends HttpServlet {
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("idUsu"));
+            String correo = request.getParameter("idUsu");
             DAOUsuario dao = new DAOUsuario();
-            if (dao.eliminar(id)) {
+            if (dao.eliminar(correo)) {
                 String mensaje = "<div class='alert alert-success text-center'>Usuario Eliminado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             } else {
@@ -188,16 +188,15 @@ public class ServletUsuario extends HttpServlet {
 
     private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("idUsu"));
             String nombre = request.getParameter("txtNombre");
             String correo = request.getParameter("txtCorreo");
             String pass = request.getParameter("txtPass");
             String tipo = request.getParameter("ddlTipo");
             DAOUsuario dao = new DAOUsuario();
             TipoUsuario ti = dao.buscarTipo(tipo);
-            Usuario usuario = new Usuario(ti, nombre, correo, pass);
-            usuario.setIdUsuario(id);
-            if (dao.buscar(id) != null) {
+            Usuario usuario = new Usuario(correo,ti, nombre, pass);
+            usuario.setCorreoUsuario(correo);
+            if (dao.buscarCorreo(correo) != null) {
                 if (dao.actualizar(usuario)) {
                     String mensaje = "<div class='alert alert-success text-center'>Usuario Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);

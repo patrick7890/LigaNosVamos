@@ -43,8 +43,7 @@ public class DAOEquipo {
     public boolean actualizar(Equipo eq) {
         try {
             iniOperacion();
-            Equipo equ = buscar(eq.getIdEquipo());
-            equ.setNombreEquipo(eq.getNombreEquipo());
+            Equipo equ = buscar(eq.getNombreEquipo());
             equ.setEstadoEquipo(eq.getEstadoEquipo());
             equ.setUsuario(eq.getUsuario());
             equ.setLiga(eq.getLiga());
@@ -80,7 +79,7 @@ public class DAOEquipo {
     public Equipo buscar(Object o) {
         try {
             iniOperacion();
-            List<Equipo> lista = session.createQuery("from Equipo where IdEquipo="+o).list();
+            List<Equipo> lista = session.createQuery("from Equipo where nombre_equipo="+o).list();
             for ( Equipo equ : lista ) {
                 return equ;
             }

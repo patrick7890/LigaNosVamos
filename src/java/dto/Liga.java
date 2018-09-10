@@ -1,5 +1,5 @@
 package dto;
-// Generated 09-09-2018 17:10:23 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 22:57:04 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,12 +12,12 @@ import java.util.Set;
 public class Liga  implements java.io.Serializable {
 
 
-     private Integer idLiga;
-     private TipoLiga tipoLiga;
      private String nombreLiga;
+     private TipoLiga tipoLiga;
      private Date fechaInicio;
      private Date fechaTermino;
      private String lugar;
+     private Set<Imagen> imagens = new HashSet<Imagen>(0);
      private Set<Equipo> equipos = new HashSet<Equipo>(0);
      private Set<LigaResultado> ligaResultados = new HashSet<LigaResultado>(0);
 
@@ -25,29 +25,30 @@ public class Liga  implements java.io.Serializable {
     }
 
 	
-    public Liga(TipoLiga tipoLiga, String nombreLiga, Date fechaInicio, Date fechaTermino, String lugar) {
-        this.tipoLiga = tipoLiga;
+    public Liga(String nombreLiga, TipoLiga tipoLiga, Date fechaInicio, Date fechaTermino, String lugar) {
         this.nombreLiga = nombreLiga;
+        this.tipoLiga = tipoLiga;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
         this.lugar = lugar;
     }
-    public Liga(TipoLiga tipoLiga, String nombreLiga, Date fechaInicio, Date fechaTermino, String lugar, Set<Equipo> equipos, Set<LigaResultado> ligaResultados) {
-       this.tipoLiga = tipoLiga;
+    public Liga(String nombreLiga, TipoLiga tipoLiga, Date fechaInicio, Date fechaTermino, String lugar, Set<Imagen> imagens, Set<Equipo> equipos, Set<LigaResultado> ligaResultados) {
        this.nombreLiga = nombreLiga;
+       this.tipoLiga = tipoLiga;
        this.fechaInicio = fechaInicio;
        this.fechaTermino = fechaTermino;
        this.lugar = lugar;
+       this.imagens = imagens;
        this.equipos = equipos;
        this.ligaResultados = ligaResultados;
     }
    
-    public Integer getIdLiga() {
-        return this.idLiga;
+    public String getNombreLiga() {
+        return this.nombreLiga;
     }
     
-    public void setIdLiga(Integer idLiga) {
-        this.idLiga = idLiga;
+    public void setNombreLiga(String nombreLiga) {
+        this.nombreLiga = nombreLiga;
     }
     public TipoLiga getTipoLiga() {
         return this.tipoLiga;
@@ -55,13 +56,6 @@ public class Liga  implements java.io.Serializable {
     
     public void setTipoLiga(TipoLiga tipoLiga) {
         this.tipoLiga = tipoLiga;
-    }
-    public String getNombreLiga() {
-        return this.nombreLiga;
-    }
-    
-    public void setNombreLiga(String nombreLiga) {
-        this.nombreLiga = nombreLiga;
     }
     public Date getFechaInicio() {
         return this.fechaInicio;
@@ -83,6 +77,13 @@ public class Liga  implements java.io.Serializable {
     
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+    public Set<Imagen> getImagens() {
+        return this.imagens;
+    }
+    
+    public void setImagens(Set<Imagen> imagens) {
+        this.imagens = imagens;
     }
     public Set<Equipo> getEquipos() {
         return this.equipos;

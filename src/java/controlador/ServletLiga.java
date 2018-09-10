@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletLiga extends HttpServlet {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -106,8 +105,8 @@ public class ServletLiga extends HttpServlet {
             String tipo = request.getParameter("ddlTipo");
             DAOLiga dao = new DAOLiga();
             TipoLiga ti = dao.buscarTipo(tipo);
-            
-            Liga l = new Liga(ti, nombreLiga, fechaini, fechater, lugar);
+
+            Liga l = new Liga(nombreLiga, ti, fechaini, fechater, lugar);
             if (dao.agregar(l)) {
                 String mensaje = "<div class='alert alert-success text-center'>Liga Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -115,7 +114,7 @@ public class ServletLiga extends HttpServlet {
                 String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
             }
-             /*
+            /*
             String hora = request.getParameter("HoraIni") + ":00";
             String fecha = request.getParameter("dateFechaIni");
             Time h = Time.valueOf(hora);
@@ -173,15 +172,15 @@ public class ServletLiga extends HttpServlet {
         try {
 
             int var = Integer.parseInt(request.getParameter("txt"));
-           String nombreLiga = request.getParameter("txtNombreLiga");
+            String nombreLiga = request.getParameter("txtNombreLiga");
             Date fechaini = Date.valueOf(request.getParameter("dateFechaIni"));
             Date fechater = Date.valueOf(request.getParameter("dateFechaTer"));
             String lugar = request.getParameter("txtLugar");
             String tipo = request.getParameter("ddlTipo");
             DAOLiga dao = new DAOLiga();
             TipoLiga ti = dao.buscarTipo(tipo);
-            Liga l = new Liga(ti, nombreLiga, fechaini, fechater, lugar);
-            l.setIdLiga(var);
+            Liga l = new Liga(nombreLiga,ti, fechaini, fechater, lugar);
+            l.setNombreLiga(nombreLiga);
             if (dao.buscar(var) != null) {
                 if (dao.actualizar(l)) {
                     String mensaje = "<div class='alert alert-success text-center'>Liga Actualizado</div>";
