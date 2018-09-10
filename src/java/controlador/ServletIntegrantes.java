@@ -43,21 +43,9 @@ public class ServletIntegrantes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        isMultipart = ServletFileUpload.isMultipartContent(request);
+       
         response.setContentType("text/html;charset=UTF-8");
-        java.io.PrintWriter out = response.getWriter();
-
-        if (!isMultipart) {
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet upload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<p>No file uploaded</p>");
-            out.println("</body>");
-            out.println("</html>");
-            return;
-        }
+        
 
         // maximum size that will be stored in memory
         String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
@@ -86,10 +74,9 @@ public class ServletIntegrantes extends HttpServlet {
                 File file = new File(archivourl, "img1.jpg");
                 items.write(file);
             }
-            out.print("<h2>ARCHIVO CORRECTAMENTE SUBIDO.....</h2>" + "\n\n" + "<a href='index.jsp'>VOVLER AL MENU</a>");
-
+            
         } catch (Exception e) {
-            out.print("Exception: " + e.getMessage() + "");
+            
         }
     }
 

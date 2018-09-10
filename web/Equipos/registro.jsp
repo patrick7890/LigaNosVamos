@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="../ProcesoEquipo" method="POST">
+                        <form action="../ProcesoEquipo" method="GET" enctype="multipart/form-data" >
                             <div class="card" style="">
                                 <div class="card-body">
                                     <h1 class="text-center">Registro De Equipo</h1>
@@ -34,11 +34,14 @@
                                         <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
                                         <input type="hidden" name="txtNombreUsu" value="${sesUsu.getCorreoUsuario()}"/>
                                 </div>
-                                <div class="form-group ">
+                                
+                                    <div class="form-group " >
                                     <label>Ingrese la Imagen de Equipo </label>
-                                    <input class="btn btn-default" type="file" name="selec" value="" enctype="multipart/form-data" onchange="loadFile(event)" />
+                                    <input class="btn btn-default" type="file" name="selec"  onchange="loadFile(event)" />
                                 </div>
-                                <div class="form-group">
+                                
+                                
+                                <div class="form-group" >
                                     <img id="output"/>
                                     <script>
                                         var loadFile = function (event) {

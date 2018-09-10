@@ -9,19 +9,23 @@ import DAO.DAOUsuario;
 import DAO.DAOEquipo;
 import DAO.DAOImagen;
 import DAO.DAOLiga;
+
 import dto.Equipo;
 import dto.Imagen;
 import dto.Liga;
 import dto.TipoLiga;
 import dto.Usuario;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -121,53 +125,11 @@ public class ServletEquipo extends HttpServlet {
             TipoLiga ti = dao.buscarTipo(tipo);
             Equipo e = new Equipo(nombre, null, ti, usu, estado);
             if (dao.agregar(e)) {
-                //imagen(request, response, e);
-
-                isMultipart = ServletFileUpload.isMultipartContent(request);
-                response.setContentType("text/html;charset=UTF-8");
-                java.io.PrintWriter out = response.getWriter();
-
-                if (!isMultipart) {
-                    out.println("<html>");
-                    out.println("<head>");
-                    out.println("<title>Servlet upload</title>");
-                    out.println("</head>");
-                    out.println("<body>");
-                    out.println("<p>No file uploaded</p>");
-                    out.println("</body>");
-                    out.println("</html>");
-                    return;
-                }
-
-                // maximum size that will be stored in memory
-                String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
-
-                DiskFileItemFactory factory = new DiskFileItemFactory();
-                factory.setSizeThreshold(maxMemSize);
-
-                // Location to save data that is larger than maxMemSize.
-                factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
-
-                // Create a new file upload handler
-                ServletFileUpload upload = new ServletFileUpload(factory);
-
-                // maximum file size to be uploaded.
-                upload.setSizeMax(maxFileSize);
-
-                factory.setSizeThreshold(1024);
-
-                factory.setRepository(new File(archivourl));
-
-                List<FileItem> partes = upload.parseRequest(request);
-
-                for (FileItem items : partes) {
-                    File file = new File(archivourl, "img1.jpg");
-                    items.write(file);
-                }
-                out.print("<h2>ARCHIVO CORRECTAMENTE SUBIDO.....</h2>" + "\n\n" + "<a href='index.jsp'>VOVLER AL MENU</a>");
+                imagen(request, response, e);
 
                 String mensaje = "<div class='alert alert-success text-center'>Equipo Agregado</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
+
             } else {
                 String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
                 request.getSession().setAttribute("mensaje", mensaje);
@@ -214,28 +176,32 @@ public class ServletEquipo extends HttpServlet {
             String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
-            response.sendRedirect("Index.jsp");
+            response.sendRedirect("Equipos/estadoEquipo.jsp");
         }
     }
+    
+   
+    
+    
 
     private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
 
-            int var = Integer.parseInt(request.getParameter("txt"));
-            String var1 = request.getParameter("txt");
-            String var2 = request.getParameter("txt");
-            String var4 = request.getParameter("txt");
-            String tipo = request.getParameter("ddlTipo");
+           
+            String nombre = request.getParameter("ddlEquipo");
+            String nombreLiga = request.getParameter("txtNombreLiga");
+            
             byte estado = 1;
             DAOEquipo dao = new DAOEquipo();
             DAOLiga daoL = new DAOLiga();
-            Liga l = daoL.buscar(var1);
-            DAOUsuario daoUsu = new DAOUsuario();
-            Usuario usu = daoUsu.buscarCorreo(var2);
-            TipoLiga ti = dao.buscarTipo(tipo);
-            Equipo e = new Equipo(var1, null, ti, usu, estado);
-            e.setNombreEquipo(var1);
-            if (dao.buscar(var) != null) {
+            
+            
+            Liga l = daoL.buscar(nombreLiga);
+            Equipo e = dao.buscar(nombre);
+            
+            e.setLiga(l);
+            
+            if (dao.buscar(nombre) != null) {
                 if (dao.actualizar(e)) {
                     String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
@@ -259,15 +225,10 @@ public class ServletEquipo extends HttpServlet {
 
         try {
 
-            Imagen i = new Imagen("Equipo-" + e.getNombreEquipo(), e, null, null);
-            DAOImagen daoimagen = new DAOImagen();
-            daoimagen.agregarI(i);
-
             isMultipart = ServletFileUpload.isMultipartContent(request);
             response.setContentType("text/html;charset=UTF-8");
             java.io.PrintWriter out = response.getWriter();
-
-            if (!isMultipart) {
+             if (!isMultipart) {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Servlet upload</title>");
@@ -276,7 +237,6 @@ public class ServletEquipo extends HttpServlet {
                 out.println("<p>No file uploaded</p>");
                 out.println("</body>");
                 out.println("</html>");
-                return;
             }
 
             // maximum size that will be stored in memory
@@ -297,6 +257,9 @@ public class ServletEquipo extends HttpServlet {
             factory.setSizeThreshold(1024);
 
             factory.setRepository(new File(archivourl));
+            Imagen i = new Imagen("Equipo-" + e.getNombreEquipo(), e, null, null);
+            DAOImagen daoimagen = new DAOImagen();
+            daoimagen.agregarI(i);
 
             List<FileItem> partes = upload.parseRequest(request);
 
@@ -307,7 +270,8 @@ public class ServletEquipo extends HttpServlet {
             }
 
         } catch (Exception ex) {
-
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado" + ex.getMessage() + "</div>";
+            request.getSession().setAttribute("mensaje", mensaje);
         }
     }
 

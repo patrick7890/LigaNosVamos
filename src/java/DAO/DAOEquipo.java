@@ -139,4 +139,6 @@ public class DAOEquipo {
             throw new RuntimeException("No se pudo listar los Equipos: " + e.getMessage());
         }
     }
+    
+    
 }
