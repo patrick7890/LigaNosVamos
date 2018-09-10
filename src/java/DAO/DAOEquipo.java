@@ -120,7 +120,7 @@ public class DAOEquipo {
     public List<Equipo> listarEquipoUsuario(Object o) {
         try {
             iniOperacion();
-            List<Equipo> lista = session.createQuery("from Equipo where usuario_id_usuario="+o).list();
+            List<Equipo> lista = session.createQuery("from Equipo where usuario_correo_usuario='"+o+"'").list();
             return lista;
         } catch (Exception e) {
             tx.rollback();
@@ -131,7 +131,7 @@ public class DAOEquipo {
     public List<Equipo> listarEquipoLiga(Object o) {
         try {
             iniOperacion();
-            List<Equipo> lista = session.createQuery("from Equipo where liga_id_liga="+o).list();
+            List<Equipo> lista = session.createQuery("from Equipo where nombre_liga="+o).list();
             return lista;
         } catch (Exception e) {
             tx.rollback();

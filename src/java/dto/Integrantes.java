@@ -1,5 +1,5 @@
 package dto;
-// Generated 09-09-2018 22:57:04 by Hibernate Tools 4.3.1
+// Generated 09-09-2018 23:17:02 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -16,28 +16,25 @@ public class Integrantes  implements java.io.Serializable {
      private String nombreIntegrante;
      private String nick;
      private byte estadoInt;
-     private int equipoIdEquipo;
      private Set<Imagen> imagens = new HashSet<Imagen>(0);
 
     public Integrantes() {
     }
 
 	
-    public Integrantes(String rutIntegrante, Equipo equipo, String nombreIntegrante, String nick, byte estadoInt, int equipoIdEquipo) {
+    public Integrantes(String rutIntegrante, Equipo equipo, String nombreIntegrante, String nick, byte estadoInt) {
         this.rutIntegrante = rutIntegrante;
         this.equipo = equipo;
         this.nombreIntegrante = nombreIntegrante;
         this.nick = nick;
         this.estadoInt = estadoInt;
-        this.equipoIdEquipo = equipoIdEquipo;
     }
-    public Integrantes(String rutIntegrante, Equipo equipo, String nombreIntegrante, String nick, byte estadoInt, int equipoIdEquipo, Set<Imagen> imagens) {
+    public Integrantes(String rutIntegrante, Equipo equipo, String nombreIntegrante, String nick, byte estadoInt, Set<Imagen> imagens) {
        this.rutIntegrante = rutIntegrante;
        this.equipo = equipo;
        this.nombreIntegrante = nombreIntegrante;
        this.nick = nick;
        this.estadoInt = estadoInt;
-       this.equipoIdEquipo = equipoIdEquipo;
        this.imagens = imagens;
     }
    
@@ -75,13 +72,6 @@ public class Integrantes  implements java.io.Serializable {
     
     public void setEstadoInt(byte estadoInt) {
         this.estadoInt = estadoInt;
-    }
-    public int getEquipoIdEquipo() {
-        return this.equipoIdEquipo;
-    }
-    
-    public void setEquipoIdEquipo(int equipoIdEquipo) {
-        this.equipoIdEquipo = equipoIdEquipo;
     }
     public Set<Imagen> getImagens() {
         return this.imagens;

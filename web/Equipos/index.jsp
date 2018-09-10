@@ -24,7 +24,7 @@
 
         <div class="container">
             <jsp:useBean id="li" class="DAO.DAOEquipo" scope="page" ></jsp:useBean>
-            <c:set  var="usu"  value="${sesUsu.getIdUsuario()}"/>
+            <c:set  var="usu"  value="${sesUsu.getCorreoUsuario()}"/>
             <c:set  var="lista"  value="${li.listarEquipoUsuario(usu)}"/>
             <div class="row">
                 <c:forEach var="list" items="${lista}">

@@ -30,7 +30,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="">Perfil</a>
-                        <form method="GET" action="../ProcesoUsuario">
+                        <form method="GET" action="/LigaNosVamos/ProcesoUsuario">
                             <button  type="submit" class="dropdown-item" name="btnAccion" value="Cerrar Sesion">Cerrar Sesion</button>
                         </form>
                     </div>

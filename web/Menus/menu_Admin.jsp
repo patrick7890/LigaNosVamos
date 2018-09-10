@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/LigaNosVamos/Index.jsp">Home</a>
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -20,13 +20,20 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="/LigaNosVamos/Equipos/index.jsp">Mi Equipo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#">Link</a>
+                <div class="btn-group">
+                    <button class="btn btn-dark dropdown-toggle" type="busecondary droptton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ${sesUsu.getNombreUsuario()}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="">Perfil</a>
+                        <form method="GET" action="/LigaNosVamos/ProcesoUsuario">
+                            <button  type="submit" class="dropdown-item" name="btnAccion" value="Cerrar Sesion">Cerrar Sesion</button>
+                        </form>
+                    </div>
+                </div>
             </li> 
         </ul>
     </div> 

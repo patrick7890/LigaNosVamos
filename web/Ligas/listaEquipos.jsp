@@ -13,8 +13,7 @@
         <title>JSP Page</title>
         <script type="text/javascript">
             var str = window.location.search;
-
-            
+            alert(str);
         </script>
     </head>
     <body>
@@ -22,9 +21,8 @@
         <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
         <c:out value="${idLiga}"/>
         <jsp:useBean id="li" class="DAO.DAOEquipo" scope="page" ></jsp:useBean>
-        <c:set  var="liga"  value="${li.listarEquipoLiga(1)}"/>
         <c:forEach var="l" items="${liga}">
-
         </c:forEach>
+            ?str
     </body>
 </html>

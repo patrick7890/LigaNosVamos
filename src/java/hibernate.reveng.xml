@@ -41,13 +41,13 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="nosvamos"/>
-  <table-filter match-name="liga"/>
-  <table-filter match-name="usuario"/>
-  <table-filter match-name="tipo_liga"/>
-  <table-filter match-name="tipo_usuario"/>
-  <table-filter match-name="equipo"/>
   <table-filter match-name="resultados"/>
+  <table-filter match-name="tipo_liga"/>
+  <table-filter match-name="equipo"/>
+  <table-filter match-name="tipo_usuario"/>
+  <table-filter match-name="usuario"/>
   <table-filter match-name="integrantes"/>
   <table-filter match-name="imagen"/>
   <table-filter match-name="liga_resultado"/>
+  <table-filter match-name="liga"/>
 </hibernate-reverse-engineering>
