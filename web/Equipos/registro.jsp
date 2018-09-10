@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${sesUsu==null}">
+<%--<c:if test="${sesUsu==null}">
     <c:redirect url="/Index.jsp"></c:redirect>
 </c:if>
 <%-- 
@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-6">
-                        <form action="../ProcesoEquipo" method="GET">
+                        <form action="../ProcesoEquipo" method="POST" enctype="multipart/form-data">
                             <div class="card" style="">
                                 <div class="card-body">
                                     <h1 class="text-center">Registro De Equipo</h1>

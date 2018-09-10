@@ -25,8 +25,7 @@ public class DAOImagen {
     
     public boolean agregarI(Imagen img){
         try {
-            iniOperacion();
-            
+             iniOperacion();
             session.save(img);
             tx.commit();
             session.close();
@@ -37,6 +36,10 @@ public class DAOImagen {
             throw new RuntimeException("No se pudo almacenar la imagen: " + e.getMessage());
         }
     }
+    
+    
+    
+    
     
     public Imagen buscarXLiga(Object o){
         try {
@@ -82,5 +85,7 @@ public class DAOImagen {
         }
         return null;
     }
+    
+    
     
 }

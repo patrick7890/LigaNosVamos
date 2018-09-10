@@ -60,13 +60,13 @@ public class ServletIntegrantes extends HttpServlet {
         }
 
         // maximum size that will be stored in memory
-        String archivourl = "C:\\imgDB";
+        String archivourl = "C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img";
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(maxMemSize);
 
         // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("c:\\imgDB"));
+        factory.setRepository(new File("C:\\Users\\Lennon\\Documents\\NetBeansProjects\\LigaNosVamos\\web\\Recursos\\img"));
 
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -83,7 +83,7 @@ public class ServletIntegrantes extends HttpServlet {
             List<FileItem> partes = upload.parseRequest(request);
 
             for (FileItem items : partes) {
-                File file = new File(archivourl, "img1");
+                File file = new File(archivourl, "img1.jpg");
                 items.write(file);
             }
             out.print("<h2>ARCHIVO CORRECTAMENTE SUBIDO.....</h2>" + "\n\n" + "<a href='index.jsp'>VOVLER AL MENU</a>");
