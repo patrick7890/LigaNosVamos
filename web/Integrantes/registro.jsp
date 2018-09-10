@@ -31,12 +31,12 @@
                             <form action="../ProcesoIntegrantes" method="GET" >
                                 <table class="table table-hover">
                                     <thead>
-                                        
+
                                     <th></th>
                                     <th>RUT</th>
                                     <th>Nombre</th>
                                     <th>Nick</th>
-                                    
+
                                     </thead>
                                 <c:forEach  varStatus="lis" begin = "1" end="5" >
                                     <tr>
@@ -86,12 +86,14 @@
 
                             </table>
                             <div class="text-center">
-                                <button class="btn btn-primary" value="Registar" name="btnAccion">Inscribir</button>
+
                                 <select name="ddlEquipo">
                                     <c:forEach var="lista" items="${equipoUsu}" >
                                         <option value="${lista.getNombreEquipo()}">${lista.getNombreEquipo()} </option>
                                     </c:forEach>
-                                </select> </div>
+                                </select> 
+                                <button class="btn btn-primary" value="Registar" name="btnAccion">Inscribir</button>
+                            </div>
                         </form>
 
                     </div>

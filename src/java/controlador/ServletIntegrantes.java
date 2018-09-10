@@ -117,33 +117,34 @@ public class ServletIntegrantes extends HttpServlet {
         try {
             String equipo = request.getParameter("ddlEquipo");
             Equipo e = new DAOEquipo().buscar(equipo);
-            for (int i = 1; i < 2; i++) {
-                String rut = request.getParameter("txtRut"+i);
-                String nombre = request.getParameter("txtNombre"+i);
-                String nick = request.getParameter("txtNick"+i);
+            for (int i = 1; i < 4; i++) {
+                String rut = request.getParameter("txtRut" + i);
+                String nombre = request.getParameter("txtNombre" + i);
+                String nick = request.getParameter("txtNick" + i);
                 byte estado = 1;
-                
+                if (rut != "" || nombre != "" || nick != "") {
 
-                Integrantes in = new Integrantes(rut, e, nombre, nick, estado);
+                    Integrantes in = new Integrantes(rut, e, nombre, nick, estado);
 
-                DAOIntegrantes daoI = new DAOIntegrantes();
+                    DAOIntegrantes daoI = new DAOIntegrantes();
 
-                if (daoI.agregar(in)) {
-                    //imagen(request, response, in);
+                    if (daoI.agregar(in)) {
+                        //imagen(request, response, in);
 
-                    String mensaje = "<div class='alert alert-success text-center'>Intengrante Agregado</div>";
-                    request.getSession().setAttribute("mensaje", mensaje);
+                        String mensaje = "<div class='alert alert-success text-center'>Intengrante Agregado</div>";
+                        request.getSession().setAttribute("mensaje", mensaje);
 
-                } else {
-                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
-                    request.getSession().setAttribute("mensaje", mensaje);
+                    } else {
+                        String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Registar</div>";
+                        request.getSession().setAttribute("mensaje", mensaje);
+                    }
+
                 }
-
             }
-
         } catch (Exception e) {
             String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
             request.getSession().setAttribute("mensaje", mensaje);
+
         } finally {
             response.sendRedirect("Integrantes/registro.jsp");
         }
