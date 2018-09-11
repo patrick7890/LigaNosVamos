@@ -15,7 +15,8 @@
     <body><jsp:useBean id="li" class="DAO.DAOIntegrantes" scope="page" ></jsp:useBean>
         <c:set  var="lista"  value="${li.listarTodo()}"/>
         <jsp:useBean id="equ" class="DAO.DAOEquipo" scope="page" ></jsp:useBean>
-        <c:set  var="equipo"  value="${equ.listarTodo()}"/>
+        <c:set  var="correo"  value="${sesUsu.getCorreoUsuario()}"/>
+        <c:set  var="equipo"  value="${equ.listarEquipoUsuario(correo)}"/>
 
         <c:choose>
             <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">

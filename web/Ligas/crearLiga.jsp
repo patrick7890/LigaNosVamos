@@ -35,14 +35,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha De Inicio :    </label>
-                                        <input type="date" name="dateFechaIni" />
-                                        <input type="time" name="HoraIni" />
+                                        <input type="date" class="form-control" name="dateFechaIni" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Fecha De Termino :  </label>
-                                        <input type="date" name="dateFechaTer" />
-                                        <input type="time" name="HoraTer" />
+                                        <input type="date" class="form-control" name="dateFechaTer" />
                                     </div>
                                     <div class="form-group">
                                         <label>Luagar: </label>
@@ -61,7 +59,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group text-center">
                                     <button class="btn btn-primary" type="submit"  name="btnAccion" value="Registar"><i class="far fa-fw fa-save"></i>Registar</button>
                                 </div>
                             </div>
@@ -71,7 +69,7 @@
                         ${mensaje}
                     </c:if>
                     <c:remove var="mensaje" />
-                 
+
                 </div>
             </div>
 

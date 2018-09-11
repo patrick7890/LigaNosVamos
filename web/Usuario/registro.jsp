@@ -21,32 +21,45 @@
     </head>
     <body>
 
-        <jsp:include page="../Menus/menu.jsp"></jsp:include>
+        <c:choose>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
+                <c:redirect url="../Index.jsp"></c:redirect>
+            </c:when>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()<=2}">
+                <jsp:include page="../Menus/menu_Admin.jsp"></jsp:include>
+            </c:when>
+            <c:when test="${sesUsu==null}">
+                <jsp:include page="../Menus/menu.jsp"></jsp:include>
+            </c:when>
+        </c:choose>
 
-            <!--inicio del contenido-->
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-sm-6">
-                        <form action="../ProcesoUsuario" method="GET">
-                            <div class="card" style="">
-                                <div class="card-body">
-                                    <h1 class="text-center">Registro de Usuarios</h1>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label>Nombre: </label>
-                                        <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo: </label>
-                                        <input type="email" name="txtCorreo" placeholder="example@example.com" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Contraseña: </label>
-                                        <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
-                                    </div>
+        <!--inicio del contenido-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-sm-6">
+                    <form action="../ProcesoUsuario" method="GET">
+                        <div class="card" style="">
+                            <div class="card-body">
+                                <h1 class="text-center">Registro de Usuarios</h1>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Nombre: </label>
+                                    <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo: </label>
+                                    <input type="email" name="txtCorreo" placeholder="example@example.com" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contraseña: </label>
+                                    <input type="password" name="txtPass" placeholder="***********" minlength="4" class="form-control"/>
+                                </div>
                                 <jsp:useBean id="dao" class="DAO.DAOUsuario" scope="page" ></jsp:useBean>
+                                <c:set var="list" value="${dao.listarTipoAdmin()}"/>
+                                <c:if test="${sesUsu==null}">
+                                    <c:set var="list" value="${dao.listarTipo()}"/>
+                                </c:if>
 
-                                <c:set var="list" value="${dao.listarTipo()}"/>
 
                                 <div class="form-group">
                                     <label>Tipo: </label>

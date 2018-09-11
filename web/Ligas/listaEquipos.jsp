@@ -18,7 +18,7 @@
     </head>
     <body>
 
-       
+
         <c:choose>
             <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
                 <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
@@ -37,11 +37,11 @@
                 <c:forEach var="list" items="${lista}">
                     <div class=" col-12 col-sm-12 col-md-6 col-xl-4 mt-2 " style="height: 100px" >
                         <form>
-                            <a href="Ligas/listaEquipos.jsp?${list.getNombreLiga()}">
+                            <a href="/LigaNosVamos/Equipos/administar.jsp?${list.getNombreEquipo()}">
                                 <div class="thumbnail group group-thumbnail"  style="height: 100px" >
                                     <style>
                                         .group-thumbnail{
-                                            background-image: url('Recursos/img/Dota.PNG');
+                                            background-image: url('../Recursos/img/Dota.PNG');
                                             background-size: cover;
                                             width: 60%;
                                             height: 60%;
@@ -52,10 +52,8 @@
                                         }
                                     </style>
                                     <div class="thumbnail-title">
-                                        <h4 class="text-truncate" title="${list.getNombreLiga()}" ><c:out value="${list.getNombreLiga()}"/></h4>
+                                        <h4 class="text-truncate" title="${list.getNombreEquipo()}" ><c:out value="${list.getNombreEquipo()}"/></h4>
                                     </div>
-                                    <span class="">${list.getFechaInicio()}</span>
-                                    <span class="">${list.getFechaTermino()}</span>
                                 </div>
                             </a>
                         </form>
@@ -63,9 +61,9 @@
                 </c:forEach>
             </div>
         </div>
-        
-        
-        
-        
+
+
+
+
     </body>
 </html>

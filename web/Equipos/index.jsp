@@ -46,16 +46,19 @@
                             <div class="thumbnail-title">
                                 <a href="administar.jsp">    <h4 class="text-truncate" >${list.getNombreEquipo()}</h4></a>
                             </div>
-                            <span>Liga actual 
-                                <c:choose>
-                                    <c:when test="${list.getLiga().getNombreLiga()!=null}">
-                                        <a href="#"><c:out value="${list.getLiga().getNombreLiga()}"/></a>
-                                    </c:when>
-                                    <c:when test="${list.getLiga().getNombreLiga()==null}">
-                                        <a href="#">Ninguna</a>
-                                    </c:when>
-                                </c:choose> 
-                            </span>
+                            <div class="text-center">
+                                <span style=" color: white"><p>Liga actual :</p>
+                                    <c:choose>
+                                        <c:when test="${list.getLiga().getNombreLiga()!=null}">
+                                            <a href="/LigaNosVamos/Ligas/listaEquipos.jsp?${list.getLiga().getNombreLiga()}"><c:out value="${list.getLiga().getNombreLiga()}"/></a>
+                                        </c:when>
+                                        <c:when test="${list.getLiga().getNombreLiga()==null}">
+                                            <p>Ninguna</p>
+                                        </c:when>
+                                    </c:choose> 
+                                </span>
+                            </div>
+
                         </div>
                     </div>
                 </c:forEach>

@@ -21,15 +21,34 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/LigaNosVamos/Equipos/index.jsp">Mi Equipo</a>
-            </li>
+                <div class="btn-group">
+                    <button class="btn btn-dark dropdown-toggle" type="busecondary droptton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Liga
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/inscribir.jsp">Postular</a>
+                    </div>
+                </div>
+            </li> 
+            <li class="nav-item">
+                <div class="btn-group">
+                    <button class="btn btn-dark dropdown-toggle" type="busecondary droptton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mi Equipo
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/registro.jsp">Crear Equipo</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Integrantes/registro.jsp">Registrar Integrantes</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/administar.jsp">Administar Integrantes</a>
+
+                    </div>
+                </div>
+            </li> 
             <li class="nav-item">
                 <div class="btn-group">
                     <button class="btn btn-dark dropdown-toggle" type="busecondary droptton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ${sesUsu.getNombreUsuario()}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="">Perfil</a>
                         <form method="GET" action="/LigaNosVamos/ProcesoUsuario">
                             <button  type="submit" class="dropdown-item" name="btnAccion" value="Cerrar Sesion">Cerrar Sesion</button>
                         </form>
