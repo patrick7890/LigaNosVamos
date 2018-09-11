@@ -37,8 +37,9 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/LigaNosVamos/Equipos/registro.jsp">Crear Equipo</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/administrar.jsp">Administar Equipo</a>
                         <a class="dropdown-item" href="/LigaNosVamos/Integrantes/registro.jsp">Registrar Integrantes</a>
-                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/administrar.jsp">Administar Integrantes</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Integrantes/administrar.jsp">Administar Integrantes</a>
 
                     </div>
                 </div>

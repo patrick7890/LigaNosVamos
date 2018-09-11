@@ -93,14 +93,14 @@ public class DAOEquipo {
     public TipoLiga buscarTipo(Object o) {
         try {
             iniOperacion();
-            List<TipoLiga> lista = session.createQuery("from TipoLiga where idtipo_liga="+o).list();
+            List<TipoLiga> lista = session.createQuery("from TipoLiga where idtipo_liga='"+o+"'").list();
             for ( TipoLiga lig : lista ) {
                 return lig;
             }
         } catch (Exception e) {
             tx.rollback();
             session.close();
-            throw new RuntimeException("No se pudo encontrar el Liga: " + e.getMessage());
+            throw new RuntimeException("No se pudo encontrar el Tipo de Liga: " + e.getMessage());
         }
         return null;
     }

@@ -179,27 +179,26 @@ public class ServletEquipo extends HttpServlet {
             String mensaje = "<div class='alert alert-danger text-center'>Error inesperado</div>";
             request.getSession().setAttribute("mensaje", mensaje);
         } finally {
-            response.sendRedirect("Equipos/estadoEquipo.jsp");
+            response.sendRedirect("Equipos/administrar.jsp");
         }
     }
 
     private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-
-            String nombre = request.getParameter("ddlEquipo");
-            String nombreLiga = request.getParameter("txtNombreLiga");
-
-            byte estado = 1;
+            String nombreEquipo = request.getParameter("txtNombreEquipo");
+            String tipo = request.getParameter("tipo");
+            String nombreUsu = request.getParameter("usu");
+            String liga = request.getParameter("liga");
             DAOEquipo dao = new DAOEquipo();
-            DAOLiga daoL = new DAOLiga();
-
-            Liga l = daoL.buscar(nombreLiga);
-            Equipo e = dao.buscar(nombre);
-
-            e.setLiga(l);
-
-            if (dao.buscar(nombre) != null) {
+            Liga l = new DAOLiga().buscar(liga);
+            DAOUsuario daoUsu = new DAOUsuario();
+            Usuario usu = daoUsu.buscarCorreo(nombreUsu);
+            TipoLiga ti = dao.buscarTipo(tipo);
+            byte estado = Byte.parseByte(request.getParameter("ddlEstado"));
+            Equipo e = new Equipo(nombreEquipo, l, ti, usu, estado);
+            if (dao.buscar(nombreEquipo) != null) {
                 if (dao.actualizar(e)) {
+                    e.setEstadoEquipo(estado);
                     String mensaje = "<div class='alert alert-success text-center'>Equipo Actualizado</div>";
                     request.getSession().setAttribute("mensaje", mensaje);
                 } else {

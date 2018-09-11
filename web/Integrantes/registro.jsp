@@ -1,10 +1,12 @@
-<%-- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sesUsu==null}">
+    <c:redirect url="/Index.jsp"></c:redirect>
+</c:if><%-- 
     Document   : registro
     Created on : 01-09-2018, 19:49:16
     Author     : Lennon
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

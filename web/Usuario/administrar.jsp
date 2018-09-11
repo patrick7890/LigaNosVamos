@@ -41,7 +41,7 @@
                             <td> <input type="text" class="form-control" name="txtNombre" value="${list.getNombreUsuario()}"/></td>
                             <td> <input type="password" class="form-control" name="txtPass" value="${list.getPassUsuario()}"/></td>
                             <td> <select readonly="" class="form-control" name="ddlTipo" ><option value="${list.getTipoUsuario().getIdTipoUsuario()}"><c:out value="${list.getTipoUsuario().getDescripcion()}"/></option>></select></td>
-                            <td> <input type="text" class="form-control" name="txtCorreo" value="${list.getCorreoUsuario()}"/></td>
+                            <td> <input readonly="" type="text" class="form-control" name="txtCorreo" value="${list.getCorreoUsuario()}"/></td>
                             <input type="hidden" name="idUsu" value="${list.getNombreUsuario()}"/>
                             <td><button type="submit" class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
                             <td><button type="submit" class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button></td>

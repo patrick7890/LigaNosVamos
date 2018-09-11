@@ -13,7 +13,6 @@
         <title>JSP Page</title>
         <script type="text/javascript">
             var str = window.location.search;
-            alert(str);
         </script>
     </head>
     <body>

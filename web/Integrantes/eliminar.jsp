@@ -1,3 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sesUsu==null}">
+    <c:redirect url="/Index.jsp"></c:redirect>
+</c:if>
 <%-- 
     Document   : eliminar
     Created on : 01-09-2018, 21:13:09
