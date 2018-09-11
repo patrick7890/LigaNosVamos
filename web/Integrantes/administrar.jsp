@@ -36,6 +36,7 @@
                                 <th>Equipo</th>
                                 <th colspan="2">Accion</th>
                                 </thead>
+                                
                             <c:forEach var="list" items="${lista}">
                                 <tr>
                                     <td>${list.getRutIntegrante()}</td>

@@ -98,4 +98,15 @@ public class DAOIntegrantes {
             throw new RuntimeException("No se pudo listar los Integrantess: " + e.getMessage());
         }
     }
+    public List<Integrantes> listarTodoEquipo(Object o) {
+        try {
+            iniOperacion();
+            List<Integrantes> lista = session.createQuery("from Integrantes equipo_nombre_equipo='"+o+"'").list();
+            return lista;
+        } catch (Exception e) {
+            tx.rollback();
+            session.close();
+            throw new RuntimeException("No se pudo listar los Integrantess: " + e.getMessage());
+        }
+    }
 }

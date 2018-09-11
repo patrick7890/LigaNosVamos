@@ -43,8 +43,6 @@
                                     <td>${list.getLiga().getNombreLiga()}</td>
                                     <td>${list.getTipoLiga().getDescripcion()}</td>
                                     <td> 
-
-
                                         <c:choose >
                                             <c:when test="${list.getEstadoEquipo() == 1}">
                                                 <p style="color: green" > activo</p>
@@ -53,13 +51,7 @@
                                                 <p style="color: red" > inactivo</p>
                                             </c:when>
                                         </c:choose>
-
-
-
                                     </td>
-
-                                    <td><button class="btn btn-primary" value="${list.getNombreEquipo()}">Actualizar</button></td>
-                                    <td><button class="btn btn-danger" value="${list.getNombreEquipo()}">Eliminar</button></td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -98,7 +90,7 @@
                                     <input type="hidden" name="txtNombreEquipo"value="${list.getNombreEquipo()}"></td>
                                     <input type="hidden" name="liga"value="${list.getLiga().getNombreLiga()}"></td>
                                     <input type="hidden" name="tipo"value="${list.getTipoLiga().getIdtipoLiga()}"></td>
-                                    <input type="hidden" name="usu"value="${sesUsu.getCorreoUsuario()}"></td>
+                                    <input type="hidden" name="usu"value="${list.getUsuario().getCorreoUsuario()}"></td>
                                     <td><button class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
                                     </tr>
                                 </form>
