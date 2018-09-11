@@ -2,10 +2,10 @@
 <c:if test="${sesUsu==null}">
     <c:redirect url="/Index.jsp"></c:redirect>
 </c:if>
-
-    Document   : registro
-    Created on : 04-sep-2018, 14:30:53
-    Author     : Duoc
+<%--
+Document   : registro
+Created on : 04-sep-2018, 14:30:53
+Author     : Duoc
 --%>
 <%@page import="dto.TipoLiga"%>
 <%@page import="java.util.List"%>
@@ -18,29 +18,36 @@
         <title>Registrar Equipos</title>
     </head>
     <body>
-        <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
+        <c:choose>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
+                <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
+            </c:when>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()<=2}">
+                <jsp:include page="../Menus/menu_Admin.jsp"></jsp:include>
+            </c:when>
+        </c:choose>
 
-            <!--inicio del contenido-->
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-sm-6">
-                        <form action="../ProcesoEquipo" method="GET" enctype="multipart/form-data" >
-                            <div class="card" style="">
-                                <div class="card-body">
-                                    <h1 class="text-center">Registro De Equipo</h1>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label>Nombre De Equipo: </label>
-                                        <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
-                                        <input type="hidden" name="txtNombreUsu" value="${sesUsu.getCorreoUsuario()}"/>
+        <!--inicio del contenido-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-sm-6">
+                    <form action="../ProcesoEquipo" method="GET" enctype="multipart/form-data" >
+                        <div class="card" style="">
+                            <div class="card-body">
+                                <h1 class="text-center">Registro De Equipo</h1>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Nombre De Equipo: </label>
+                                    <input type="text" name="txtNombre" placeholder="Ej:Juan" minlength="4" class="form-control"/>
+                                    <input type="hidden" name="txtNombreUsu" value="${sesUsu.getCorreoUsuario()}"/>
                                 </div>
-                                
-                                    <div class="form-group " >
+
+                               <!-- <div class="form-group " >
                                     <label>Ingrese la Imagen de Equipo </label>
                                     <input class="btn btn-default" type="file" name="selec"  onchange="loadFile(event)" />
                                 </div>
-                                
-                                
+
+
                                 <div class="form-group" >
                                     <img id="output"/>
                                     <script>
@@ -49,7 +56,7 @@
                                             output.src = URL.createObjectURL(event.target.files[0]);
                                         };
                                     </script>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label>Tipo Liga: </label>

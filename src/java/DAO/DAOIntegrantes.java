@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
  * @author Patricio
  */
 public class DAOIntegrantes {
+
     private Session session;
     private Transaction tx;
 
@@ -22,8 +23,7 @@ public class DAOIntegrantes {
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
     }
-    
-    
+
     public boolean agregar(Integrantes inte) {
         try {
             iniOperacion();
@@ -38,11 +38,11 @@ public class DAOIntegrantes {
         }
     }
 
-    
     public boolean actualizar(Integrantes inte) {
         try {
             iniOperacion();
-            Integrantes in = buscar(inte.getRutIntegrante());
+            Integrantes in = new Integrantes();
+            in.setRutIntegrante(inte.getRutIntegrante());
             in.setNombreIntegrante(inte.getNombreIntegrante());
             in.setEquipo(inte.getEquipo());
             in.setEstadoInt(inte.getEstadoInt());
@@ -57,7 +57,6 @@ public class DAOIntegrantes {
         }
     }
 
-    
     public boolean eliminar(Object o) {
         try {
             iniOperacion();
@@ -73,23 +72,21 @@ public class DAOIntegrantes {
         }
     }
 
-    
     public Integrantes buscar(Object o) {
         try {
             iniOperacion();
-            List<Integrantes> lista = session.createQuery("from Integrantes where RutIntegrante="+o).list();
-            for ( Integrantes inte : lista ) {
+            List<Integrantes> lista = session.createQuery("from Integrantes where rut_integrante='" + o + "'").list();
+            for (Integrantes inte : lista) {
                 return inte;
             }
         } catch (Exception e) {
             tx.rollback();
             session.close();
-            throw new RuntimeException("No se pudo blicar el Integrantes: " + e.getMessage());
+            throw new RuntimeException("No se pudo buscar el Integrantes: " + e.getMessage());
         }
         return null;
     }
 
-    
     public List<Integrantes> listarTodo() {
         try {
             iniOperacion();

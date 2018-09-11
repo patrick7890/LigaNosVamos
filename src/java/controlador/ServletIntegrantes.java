@@ -51,7 +51,6 @@ public class ServletIntegrantes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
         String opcion = request.getParameter("btnAccion");
 
         switch (opcion) {
@@ -159,8 +158,39 @@ public class ServletIntegrantes extends HttpServlet {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void actualizar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void actualizar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String rut = request.getParameter("txtRut");
+            String nombre = request.getParameter("txtNombre");
+            String nick = request.getParameter("txtNick");
+            byte estado = Byte.parseByte(request.getParameter("ddlEstado"));
+            String equipo = request.getParameter("ddlEquipo");
+            Equipo e = new DAOEquipo().buscar(equipo);
+            if (rut != "" || nombre != "" || nick != "") {
+
+                Integrantes in = new Integrantes(rut, e, nombre, nick, estado);
+
+                DAOIntegrantes daoI = new DAOIntegrantes();
+
+                if (daoI.actualizar(in)) {
+                    //imagen(request, response, in);
+
+                    String mensaje = "<div class='alert alert-success text-center'>Intengrante Actualizado</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+
+                } else {
+                    String mensaje = "<div class='alert alert-danger text-center'>No se Pudo Actualizar</div>";
+                    request.getSession().setAttribute("mensaje", mensaje);
+                }
+
+            }
+        } catch (Exception e) {
+            String mensaje = "<div class='alert alert-danger text-center'>Ocurrio un error insesperado " + e.getMessage() + "</div>";
+            request.getSession().setAttribute("mensaje", mensaje);
+
+        } finally {
+            response.sendRedirect("Equipos/administrar.jsp");
+        }
     }
 
     private void imagen(HttpServletRequest request, HttpServletResponse response, Integrantes in) {

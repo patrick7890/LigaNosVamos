@@ -26,7 +26,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/LigaNosVamos/Usuario/registro.jsp">Crear Usuario</a>
-                        <a class="dropdown-item" href="/LigaNosVamos/Usuario/administrar.jsp">administar Usuario</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Usuario/administrar.jsp">administrar Usuario</a>
                     </div>
                 </div>
             </li> 
@@ -36,8 +36,8 @@
                         Equipos
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/crearLiga.jsp">Crear Liga</a>
-                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/administrar.jsp">administar Liga</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/registro.jsp">Crear Equipos</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Equipos/administrar.jsp">administrar Equipos</a>
                     </div>
                 </div>
             </li> 
@@ -48,7 +48,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/LigaNosVamos/Ligas/crearLiga.jsp">Crear Liga</a>
-                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/administrar.jsp">administar Liga</a>
+                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/administrar.jsp">administrar Liga</a>
                     </div>
                 </div>
             </li> 

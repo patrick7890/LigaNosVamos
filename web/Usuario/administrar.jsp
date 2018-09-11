@@ -1,3 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${sesUsu==null}">
+    <c:redirect url="/Index.jsp"></c:redirect>
+</c:if>
 <%-- 
     Document   : administrar
     Created on : 08-09-2018, 11:40:21
@@ -12,7 +16,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../Menus/menu.jsp"></jsp:include>
+        <c:choose>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
+                <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
+            </c:when>
+            <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()<=2}">
+                <jsp:include page="../Menus/menu_Admin.jsp"></jsp:include>
+            </c:when>
+        </c:choose>
         <div class="row justify-content-md-center">
             <div class="container">
 
@@ -31,7 +42,7 @@
                             <td> <input type="password" class="form-control" name="txtPass" value="${list.getPassUsuario()}"/></td>
                             <td> <select readonly="" class="form-control" name="ddlTipo" ><option value="${list.getTipoUsuario().getIdTipoUsuario()}"><c:out value="${list.getTipoUsuario().getDescripcion()}"/></option>></select></td>
                             <td> <input type="text" class="form-control" name="txtCorreo" value="${list.getCorreoUsuario()}"/></td>
-                            <input type="hidden" name="idUsu" value="${list.getIdUsuario()}"/>
+                            <input type="hidden" name="idUsu" value="${list.getNombreUsuario()}"/>
                             <td><button type="submit" class="btn btn-primary" name="btnAccion" value="Actualizar">Actualizar</button></td>
                             <td><button type="submit" class="btn btn-danger" name="btnAccion" value="Eliminar">Eliminar</button></td>
                         </form>
