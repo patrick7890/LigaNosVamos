@@ -121,7 +121,7 @@ public class ServletEquipo extends HttpServlet {
             String nombre = request.getParameter("txtNombre");
             String nombreUsu = request.getParameter("txtNombreUsu");
             String tipo = request.getParameter("ddlTipo");
-            byte estado = 1;
+            byte estado = 0;
             DAOEquipo dao = new DAOEquipo();
             DAOUsuario daoUsu = new DAOUsuario();
             Usuario usu = daoUsu.buscarCorreo(nombreUsu);

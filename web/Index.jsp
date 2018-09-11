@@ -11,6 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Index</title>
+        <style>
+            body{
+                background-image: url(Recursos/img/for2.jpg); 
+                background-size: contain;
+            }
+        </style>
     </head>
     <body>
         

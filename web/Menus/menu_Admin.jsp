@@ -8,6 +8,7 @@
 <link href="/LigaNosVamos/Recursos/fontawesome/css/all.min.css" rel="stylesheet" type="text/css"/>
 <script src="/LigaNosVamos/Recursos/js/jquery-3.2.0.min.js" type="text/javascript"></script>
 <script src="/LigaNosVamos/Recursos/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/LigaNosVamos/Recursos/css/estilo.css" rel="stylesheet" type="text/css"/>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
@@ -48,7 +49,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/LigaNosVamos/Ligas/crearLiga.jsp">Crear Liga</a>
-                        <a class="dropdown-item" href="/LigaNosVamos/Ligas/administrar.jsp">administrar Liga</a>
+                        <a class="dropdown-item" href="#">administrar Liga</a>
                     </div>
                 </div>
             </li> 
@@ -67,3 +68,18 @@
         </ul>
     </div> 
 </nav>
+<!--<style>
+    body{
+        background-image: url(../Recursos/img/for2.jpg); 
+        background-size: contain;
+    }
+</style>-->
+<div id="foot">
+    <footer>
+        <div class="row text-center">
+            <div class="col-sm-12">
+                <h4>© Todos los derechos reservados.</h4>
+            </div>
+        </div>
+    </footer>
+</div>

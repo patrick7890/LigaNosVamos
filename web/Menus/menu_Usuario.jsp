@@ -9,6 +9,7 @@
 <link href="/LigaNosVamos/Recursos/fontawesome/css/all.min.css" rel="stylesheet" type="text/css"/>
 <script src="/LigaNosVamos/Recursos/js/jquery-3.2.0.min.js" type="text/javascript"></script>
 <script src="/LigaNosVamos/Recursos/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/LigaNosVamos/Recursos/css/estilo.css" rel="stylesheet" type="text/css"/>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
@@ -59,3 +60,12 @@
         </ul>
     </div> 
 </nav>
+<div id="foot">
+    <footer>
+        <div class="row text-center">
+            <div class="col-sm-12">
+                <h4>© Todos los derechos reservados.</h4>
+            </div>
+        </div>
+    </footer>
+</div>

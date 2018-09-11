@@ -38,20 +38,25 @@
                                 <th colspan="2">Accion</th>
                                 </thead>
                             <c:forEach var="list" items="${equipoUsu}">
-                                <tr>
-                                    <td> ${list.getNombreEquipo()}</td>
-                                    <td>${list.getLiga().getNombreLiga()}</td>
-                                    <td>${list.getTipoLiga().getDescripcion()}</td>
-                                    <td> 
-                                        <c:choose >
-                                            <c:when test="${list.getEstadoEquipo() == 1}">
-                                                <p style="color: green" > activo</p>
-                                            </c:when>
-                                            <c:when test="${list.getEstadoEquipo() == 0}">
-                                                <p style="color: red" > inactivo</p>
-                                            </c:when>
-                                        </c:choose>
-                                    </td>
+                                <form action="../ProcesoEquipo" method="GET">
+                                    <tr>
+                                        <td>${list.getUsuario().getNombreUsuario()}</td>
+                                        <td>${list.getNombreEquipo()}</td>
+                                        <td>${list.getLiga().getNombreLiga()}</td>
+                                        <td>${list.getTipoLiga().getDescripcion()}</td>
+                                        <td> 
+                                            <c:choose >
+                                                <c:when test="${list.getEstadoEquipo() == 1}">
+                                                    <p style="color: green" > activo</p>
+                                                </c:when>
+                                                <c:when test="${list.getEstadoEquipo() == 0}">
+                                                    <p style="color: red" > inactivo</p>
+                                                </c:when>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </form>
+                                </td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -82,9 +87,9 @@
                                         <td>${list.getLiga().getNombreLiga()}</td>
                                         <td>${list.getTipoLiga().getDescripcion()}</td>
                                         <td> 
-                                            <select class="form-control" name="ddlEstado">
-                                                <option value="1">Activo</option>
-                                                <option value="0">Inactivo</option>
+                                            <select  class="form-control" name="ddlEstado">
+                                                <option value="1" ${list.getEstadoEquipo() == 1? 'selected' : ''}>Activo</option>
+                                                <option value="0" ${list.getEstadoEquipo() == 0? 'selected' : ''}>Inactivo</option>
                                             </select>
                                         </td>
                                     <input type="hidden" name="txtNombreEquipo"value="${list.getNombreEquipo()}"></td>
