@@ -27,7 +27,7 @@
             <c:when test="${sesUsu.getTipoUsuario().getIdTipoUsuario()>2}">
                 <jsp:include page="../Menus/menu_Usuario.jsp"></jsp:include>
                     <div class="container">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <form action="../ProcesoIntegrantes" method="GET" >
                                 <table class="table table-hover">
                                     <thead>
